@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aqua Pump Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <aside class="sidebar">
+        <h2>Aqua Pump</h2>
+
+        <nav>
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="control.html">Control Panel</a>
+            <a href="history.html">History</a>
+            <a href="alerts.html">Alerts and System</a>
+        </nav>
+
+    </aside>
+
+    <main>
+
+        <header class="header">
+
+            <div>
+                <h1>Dashboard</h1>
+                <p>Water Management System</p>
+            </div>
+
+            <div is="systemStatus" class="online">System Online</div>
+
+        </header>
+
+        <!--Main Statistics-->
+
+        <section class="cards">
+            <div class="class">
+                <h3>Water Level</h3>
+
+                <p id="waterLevel" class="big-value">75%</p>
+
+                <div class="progress">
+                    <div class="waterBar"></div>
+                </div>
+            </div>
+
+            <div class="card">
+
+                <h3>Pump Status</h3>
+
+                <p id="pumpStatus" class="big-value">OFF</p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Flow Rate</h3>
+
+                <p id="flowRate" class="big-value">0 L/min</p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Today's Consumption</h3>
+
+                <p id="consumption" class="big-value">125 L</p>
+
+            </div>
+
+        </section>
+
+        <!--Quick Control-->
+        <section class="card">
+
+            <h2>Quick Pump Control</h2>
+
+            <button onclick="startPump()" class="start">Start Pump</button>
+
+            <button onclick="stopPump()" class="stop">Stop Pump</button>
+
+        </section>
+
+        <!--Recent Alerts-->
+
+        <section class="card">
+
+            <h2>System Alert</h2>
+
+            <p id="alert">No active alerts.</p>
+
+        </section>
+    </main>
+
+    <script src="js/dasboard.js"></script>
+</body>
+</html>
