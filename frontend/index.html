@@ -5,96 +5,612 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aqua Pump Dashboard</title>
 
+    <link rel="icon" href="assets/aq.png">
     <link rel="stylesheet" href="css/style.css">
+    <!--Chart.js-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     
     <aside class="sidebar">
-        <h2>Aqua Pump</h2>
 
-        <nav>
-            <a href="dashboard.html" class="active">Dashboard</a>
-            <a href="control.html">Control Panel</a>
-            <a href="history.html">History</a>
-            <a href="alerts.html">Alerts and System</a>
-        </nav>
+        <div class="brand">
 
-    </aside>
-
-    <main>
-
-        <header class="header">
-
-            <div>
-                <h1>Dashboard</h1>
-                <p>Water Management System</p>
+            <div class="brand-icon">
+                <!-- <img src="assets/aqLogo.png" alt="Aqua Pump Logo"> -->
+                 #
             </div>
 
-            <div is="systemStatus" class="online">System Online</div>
+            <div>
+                <h2>Aqua Pump</h2>
+                <span>Smart Water System</span>
+            </div>
+            
+        </div>
+
+        <nav class="navigation">
+
+            <a href="index.html" class="nav-link active">
+                <span>></span>
+                Dashboard
+            </a>
+
+            <a href="#control.html" class="nav-link">
+                <span>></span>
+                Control Panel
+            </a>
+
+            <a href="#history.html" class="nav-link">
+                <span>></span>
+                History
+            </a>
+
+            <a href="alerts.html" class="nav-link">
+                <span>></span>
+                Alerts & System
+            </a>
+        </nav>
+
+        <!--Sidebar System Status-->
+        <div class="sidebar-status">
+
+                <div class="status-icon">
+                    0
+                </div>
+
+                <div>
+                    <strong>System Status</strong>
+                    <p>All systems normal</p>
+                </div>
+
+            </div>
+
+            <div class="last-update">
+
+                <span>Last Update</span>
+
+                <strong id="lastUpdate">
+                    17 aug 2026, 10:40 PM
+                </strong>
+            </div>
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <button class="menu-button" id="menButton">
+                ☰
+            </button>
+
+            <div class="topbar-right">
+
+                <div class="system-online">
+                    <span class="online-dot"></span>
+                    System Online
+                </div>
+
+                <div class="notification">
+                    🔔
+                    <span class="notification-count">2</span>
+                </div>
+
+                <div class="date-time">
+
+                    <strong>19 Aug 2026</strong>
+
+                    <span id="currentTime">
+                        5:08 PM
+                    </span>
+
+                </div>
+
+                <div class="user-profile">
+
+                    <div class="avatar">
+                        A
+                    </div>
+
+                    <div>
+                        <strong>Admin</strong>
+                        <span>System Administrator</span>
+                    </div>
+
+                    <span>~</span>
+                
+                </div>
+
+            </div>
 
         </header>
 
-        <!--Main Statistics-->
 
-        <section class="cards">
-            <div class="class">
-                <h3>Water Level</h3>
+        <!-- =======PAGE HEADER======== -->
 
-                <p id="waterLevel" class="big-value">75%</p>
+        <section class="page-header">
 
-                <div class="progress">
-                    <div class="waterBar"></div>
+            <div>
+
+                <h1>Dashboard</h1>
+
+                <p>Real-time overview of your water pumping system</p>
+
+            </div>
+
+        </section>
+
+
+        <!-- STATISTICS -->
+
+        <section class="statistics-grid">
+
+            <!-- Pump Status -->
+
+            <div class="stat-card pump-card">
+
+                <div class="stat-info">
+
+                    <span class="stat-label">
+                        Pump Status
+                    </span>
+
+                    <strong id="pumpStatus">
+                        OFF
+                    </strong>
+
+                    <small id="pumpMode">
+                        Standby Mode
+                    </small>
+
                 </div>
-            </div>
 
-            <div class="card">
-
-                <h3>Pump Status</h3>
-
-                <p id="pumpStatus" class="big-value">OFF</p>
+                <div class="stat-icon blue">
+                    #
+                </div>
 
             </div>
 
-            <div class="card">
 
-                <h3>Flow Rate</h3>
+            <!-- Flow Rate -->
 
-                <p id="flowRate" class="big-value">0 L/min</p>
+            <div class="stat-card flow-card">
+
+                <div class="stat-info">
+
+                    <span class="stat-label">
+                        Flow Rate
+                    </span>
+
+                    <strong id="flowRate">
+                        0 L/min
+                    </strong>
+
+                    <small>
+                        Current Flow
+                    </small>
+
+                </div>
+
+                <div class="stat-icon green">
+                    =<br>=
+                </div>
 
             </div>
 
-            <div class="card">
 
-                <h3>Today's Consumption</h3>
+            <!-- Consumption -->
 
-                <p id="consumption" class="big-value">125 L</p>
+            <div class="stat-card consumption-card">
+
+                <div class="stat-info">
+
+                    <span class="stat-label">
+                        Today's Consumption
+                    </span>
+
+                    <strong id="consumption">
+                        125 L
+                    </strong>
+
+                    <small>
+                        Total Today
+                    </small>
+
+                </div>
+
+                <div class="stat-icon orange">
+                    #
+                </div>
+
+            </div>
+
+
+            <!-- Runtime -->
+
+            <div class="stat-card runtime-card">
+
+                <div class="stat-info">
+
+                    <span class="stat-label">
+                        Runtime Today
+                    </span>
+
+                    <strong id="runtime">
+                        00:00:00
+                    </strong>
+
+                    <small>
+                        HH:MM:SS
+                    </small>
+
+                </div>
+
+                <div class="stat-icon purple">
+                    @
+                </div>
 
             </div>
 
         </section>
 
-        <!--Quick Control-->
-        <section class="card">
 
-            <h2>Quick Pump Control</h2>
 
-            <button onclick="startPump()" class="start">Start Pump</button>
 
-            <button onclick="stopPump()" class="stop">Stop Pump</button>
+        <!-- ============ MONITORING SECTION ============ -->
+
+        <section class="monitoring-grid">
+
+
+            <!-- WATER LEVEL -->
+
+            <div class="panel water-level-panel">
+
+                <div class="panel-header">
+
+                    <h2>Water Level</h2>
+
+                </div>
+
+                <div class="water-gauge">
+
+                    <div class="gauge">
+
+                        <div class="gauge-content">
+
+                            <strong id="waterLevel">
+                                75%
+                            </strong>
+
+                            <span>
+                                1875 / 2500 L
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="water-status">
+
+                    <span>
+                        Reservoir Level
+                    </span>
+
+                    <strong>
+                        Normal #
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- WATER LEVEL CHART -->
+
+            <div class="panel chart-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Water Level Trend
+                        </h2>
+
+                        <span>
+                            Last 24 Hours
+                        </span>
+
+                    </div>
+
+                    <select id="chartRange">
+
+                        <option value="24">
+                            24 Hours
+                        </option>
+
+                        <option value="7">
+                            7 Days
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="chart-container">
+
+                    <canvas id="waterLevelChart"></canvas>
+
+                </div>
+
+            </div>
+
+
+            <!-- PUMP CONTROL -->
+
+            <div class="panel control-panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        Pump Control
+                    </h2>
+
+                </div>
+
+                <button id="startPump" class="control-button start-button">
+
+                    <span>></span>
+                    START PUMP
+
+                </button>
+
+                <div class="control-status">
+
+                    <span class="status-indicator"></span>
+
+                    <div>
+
+                        <small>
+                            Control Status
+                        </small>
+
+                        <p id="controlMessage">
+                            Pump is currently stopped
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </section>
 
-        <!--Recent Alerts-->
 
-        <section class="card">
 
-            <h2>System Alert</h2>
+        <!-- =============== BOTTOM SECTION =============== -->
 
-            <p id="alert">No active alerts.</p>
+        <section class="bottom-grid">
+
+            <!-- RECENTLY ACTIVITY -->
+
+            <div class="panel activity-panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        Recent Activity
+                    </h2>
+
+                </div>
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Time</th>
+                                <th>Event</th>
+                                <th>Pump</th>
+                                <th>Duration</th>
+                                <th>Water Used</th>
+                                <th>Status</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="activityTable">
+
+                            <tr>
+
+                                <td>08:30 PM</td>
+                                <td class="event-stop">
+                                    Pump Stopped
+                                </td>
+                                <td>Pump 1</td>
+                                <td>15 min</td>
+                                <td>80 L</td>
+
+                                <td>
+                                    <span class="badge success">
+                                        Completed
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>08:15 PM</td>
+                                <td class="event-start">
+                                    Pump Started
+                                </td>
+                                <td>Pump 1</td>
+                                <td>--</td>
+                                <td>--</td>
+
+                                <td>
+                                    <span class="badge success">
+                                        Completed
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>06:45 PM</td>
+                                <td class="event-stop">
+                                    Pump Stopped
+                                </td>
+                                <td>Pump 2</td>
+                                <td>20 min</td>
+                                <td>120 L</td>
+
+                                <td>
+                                    <span class="badge success">
+                                        Completed
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>08:25 PM</td>
+                                <td class="event-start">
+                                    Pump Started
+                                </td>
+                                <td>Pump 2</td>
+                                <td>--</td>
+                                <td>--</td>
+
+                                <td>
+                                    <span class="badge success">
+                                        Completed
+                                    </span>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <a href="history.html" class="view-history">
+                    @ &nbsp; View Full History
+                </a>
+
+            </div>
+
+
+            <!-- SYSTEM ALERTS -->
+
+            <div class="panel alerts-panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        System Alerts
+                    </h2>
+
+                    <a href="alerts.html"></a>
+
+                </div>
+
+                <div class="alert-item">
+
+                    <div class="alert-icon green">
+                        >
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            All systems normal
+                        </strong>
+
+                        <p>
+                            No active alerts
+                        </p>
+                        
+                    </div>
+
+                    <span>
+                        10:40 PM
+                    </span>
+
+                </div>
+
+                <div class="alert-item">
+
+                    <div class="alert-icon orange">
+                        !
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Water Level is normal
+                        </strong>
+
+                        <p>
+                            Reservoir is within safe range
+                        </p>
+
+                    </div>
+
+                    <span>
+                        10:40 PM
+                    </span>
+
+                </div>
+
+                <div class="alert-item">
+
+                    <div class="alert-icon blue">
+                        i
+                    </div>
+
+                    <strong>
+                        System check completed
+                    </strong>
+
+                    <p>
+                        All sensors are functioning
+                    </p>
+
+                </div>
+
+                <span>
+                    10:35 PM
+                </span>
+                
+            </div>
 
         </section>
+
     </main>
 
-    <script src="js/dasboard.js"></script>
+
+    <script src="js/dashboard.js"></script>
+
 </body>
 </html>
