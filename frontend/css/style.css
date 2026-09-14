@@ -171,3 +171,37 @@ body {
     align-items: center;
     justify-content: space-between;
 }
+
+.menu-button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+/* Online */
+
+.system-online {
+    padding: 8px 14px;
+    border: 1px solid rgba(24, 200, 137, 0.4);
+    color: var(--green);
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.online-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    margin-right: 6px;
+}
