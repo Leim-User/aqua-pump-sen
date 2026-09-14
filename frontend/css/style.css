@@ -673,3 +673,39 @@ td {
     font-weight: bold;
     font-size: 11px;
 }
+
+.alert-icon.green {
+    color: var(--green);
+    background: rgba(24, 200, 137, 0.12);
+}
+
+.alert-icon.orange {
+    color: var(--orange);
+    background: rgba(245, 166, 35, 0.12);
+}
+
+.alert-icon.blue {
+    color: var(--blue);
+    background: rgba(37, 131, 255, 0.12);
+}
+
+.alert-item div:nth-child(2) {
+    flex: 1;
+}
+
+.alert-item strong {
+    font-size: 10px;
+}
+
+.alert-item p {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 9px;
+    line-height: 1.4;
+}
+
+.alert-item > span:last-child {
+    color: var(--muted);
+    font-size: 8px;
+    white-space: nowrap;
+}
