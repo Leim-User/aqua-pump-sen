@@ -384,3 +384,144 @@ body {
     color: var(--purple);
     background: rgba(168, 85, 247, 0.15);
 }
+
+/* PANELS */
+
+.monitoring-grid {
+    padding: 20px 30px 0;
+    display: grid;
+    grid-template-columns: 1fr 1.65fr 0.85fr;
+    gap: 10px;
+}
+
+.panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 18px;
+    min-width: 0;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.panel-header h2 {
+    font-size: 15px;
+}
+
+.panel-header span {
+    color: var(--muted);
+    font-size: 11px;
+    display: block;
+    margin-top: 5px;
+}
+
+.panel-header select {
+    background: var(--panel-light);
+    color: white;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 8px 10px;
+    font-size: 11px;
+}
+
+/* WATER GAUGE */
+
+.water-level-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 220px;
+}
+
+.gauge {
+    width: 205px;
+    height: 205px;
+    border-radius: 50%;
+    background: conic-gradient(var(--blue) 0deg 270deg, #34445a 270deg 360deg);
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.gauge::before {
+    content: "";
+    position: absolute;
+    width: 165px;
+    height: 165px;
+    border-radius: 50%;
+    background: var(--panel);
+}
+
+.gauge-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.gauge-content strong {
+    font-size: 42px;
+}
+
+.gauge-content span {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.water-status {
+    background: #142a43;
+    padding: 11px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+}
+
+.water-status span {
+    color: #a6b9ce;
+}
+
+.water-status strong {
+    color: var(--green);
+}
+
+/* ===========================
+    NON-CHART DASHBOARD CONTENT
+   =========================== */
+
+.control-button {
+    width: 100%;
+    padding: 13px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.start-button {
+    background: var(--blue);
+    color: white;
+}
+
+.start-button:hover {
+    filter: brightness(1.08);
+}
+
+.stop-button {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: var(--red);
+}
+
+.stop-button:hover {
+    background: rgba(239, 68, 68, 0.2);
+}
