@@ -445,6 +445,7 @@ body {
     background: conic-gradient(var(--blue) 0deg 270deg, #34445a 270deg 360deg);
     display: flex;
     align-items: center;
+    justify-content: center;
     position: relative;
 }
 
