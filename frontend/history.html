@@ -1,676 +1,125 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Aqua Pump | History</title>
-
-    <link rel="stylesheet" href="css/history.css"/>
-    <link rel="icon" href="assets/aq.png"/>
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History | Aqua Pump</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-
-
-    <!-- SIDEBAR -->
-
-    <aside class="sidebar">
-
-        <div class="brand">
-
-            <div class="brand-icon">
-                <img src="assets/aqLogo.png" alt="logo"/>
-            </div>
-
-            <div>
-                <h2>Aqua Pump</h2>
-                <span>Smart Water System</span>
-            </div>
-
+    
+<aside class="sidebar">
+    <div class="brand">
+        <div class="brand-icon">#</div>
+        <div>
+            <h2>Aqua Pump</h2>
+            <span>Smart Water System</span>
         </div>
+    </div>
 
+    <nav class="navigation">
+        <a href="index.html" class="nav-link ">
+            <span>&gt;</span> Dashboard
+        </a>
+        <a href="control.html" class="nav-link ">
+            <span>&gt;</span> Control Panel
+        </a>
+        <a href="history.html" class="nav-link active">
+            <span>&gt;</span> History
+        </a>
+        <a href="alerts.html" class="nav-link ">
+            <span>&gt;</span> Alerts &amp; System
+        </a>
+    </nav>
 
-        <nav class="navigation">
-
-            <a href="index.html" class="nav-link">
-
-                <span>⌂</span>
-
-                Dashboard
-
-            </a>
-
-
-            <a href="control.html" class="nav-link">
-
-                <span>◉</span>
-
-                Control Panel
-
-            </a>
-
-
-            <a href="history.html"
-               class="nav-link active">
-
-                <span>↗</span>
-
-                History
-
-            </a>
-
-
-            <a href="alerts.html" class="nav-link">
-
-                <span>♢</span>
-
-                Alerts & System
-
-            </a>
-
-        </nav>
-
-
-        <div class="sidebar-status">
-
-            <div class="status-icon">
-                ●
-            </div>
-
-            <div>
-
-                <strong>
-                    System Status
-                </strong>
-
-                <p>
-                    All systems normal
-                </p>
-
-            </div>
-
+    <div class="sidebar-status">
+        <div class="status-icon">●</div>
+        <div>
+            <strong>System Status</strong>
+            <p>All systems normal</p>
         </div>
+    </div>
 
+    <div class="last-update">
+        <span>Last Update</span>
+        <strong id="lastUpdate">Just now</strong>
+    </div>
+</aside>
 
-        <div class="last-update">
-
-            <span>
-                Last Update
-            </span>
-
-            <strong>
-                17 Aug 2026, 10:40 PM
-            </strong>
-
-        </div>
-
-    </aside>
-
-
-
-    <!-- MAIN CONTENT -->
 
     <main class="main-content">
-
-
-        <!-- TOPBAR -->
-
         <header class="topbar">
-
-            <button class="menu-button">
-                ☰
-            </button>
-
-
+            <button class="menu-button" id="menuButton" type="button">☰</button>
             <div class="topbar-right">
-
                 <div class="system-online">
-
-                    <span class="online-dot"></span>
-
-                    System Online
-
+                    <span class="online-dot"></span> System Online
                 </div>
-
-
-                <div class="notification">
-
-                    🔔
-
-                    <span class="notification-count">
-                        2
-                    </span>
-
-                </div>
-
-
+                <div class="notification">🔔 <span class="notification-count">0</span></div>
                 <div class="date-time">
-
-                    <strong>
-                        17 Aug 2026
-                    </strong>
-
-                    <span>
-                        10:40 PM
-                    </span>
-
+                    <strong id="currentDate">14 Sep 2026</strong>
+                    <span id="currentTime">12:00 AM</span>
                 </div>
-
-
                 <div class="user-profile">
-
-                    <div class="avatar">
-                        A
-                    </div>
-
+                    <div class="avatar">A</div>
                     <div>
-
-                        <strong>
-                            Admin
-                        </strong>
-
-                        <span>
-                            System Administrator
-                        </span>
-
+                        <strong>Admin</strong>
+                        <span>System Administrator</span>
                     </div>
-
-                    <span>
-                        ⌄
-                    </span>
-
+                    <span>⌄</span>
                 </div>
-
             </div>
-
         </header>
 
-
-
-        <!-- PAGE HEADER -->
-
-        <section class="page-header">
-
-            <div>
-
-                <h1>
-                    History
-                </h1>
-
-                <p>
-                    Review pump activity and water consumption
-                </p>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- SUMMARY CARDS -->
-
-        <section class="history-summary">
-
-
-            <div class="history-card">
-
-                <span>
-                    Today's Consumption
-                </span>
-
-                <strong>
-                    125 L
-                </strong>
-
-                <small>
-                    Total water used
-                </small>
-
-            </div>
-
-
-            <div class="history-card">
-
-                <span>
-                    Pump Runtime
-                </span>
-
-                <strong>
-                    02h 35m
-                </strong>
-
-                <small>
-                    Today's runtime
-                </small>
-
-            </div>
-
-
-            <div class="history-card">
-
-                <span>
-                    Pump Cycles
-                </span>
-
-                <strong>
-                    12
-                </strong>
-
-                <small>
-                    Start/stop cycles
-                </small>
-
-            </div>
-
-
-            <div class="history-card">
-
-                <span>
-                    Average Flow
-                </span>
-
-                <strong>
-                    9.8 L/min
-                </strong>
-
-                <small>
-                    Today's average
-                </small>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- HISTORY TABLE -->
-
-        <section class="panel history-panel">
-
-
-            <!-- TOOLBAR -->
-
-            <div class="history-toolbar">
-
-                <div>
-
-                    <h2>
-                        Pump Activity
-                    </h2>
-
-                    <span>
-                        Recorded pumping operations
-                    </span>
-
-                </div>
-
-
-                <div class="filters">
-
-
-                    <select id="dateFilter">
-
-                        <option>
-                            Today
-                        </option>
-
-                        <option>
-                            Yesterday
-                        </option>
-
-                        <option>
-                            Last 7 Days
-                        </option>
-
-                        <option>
-                            Last 30 Days
-                        </option>
-
-                    </select>
-
-
-                    <select id="pumpFilter">
-
-                        <option>
-                            All Pumps
-                        </option>
-
-                        <option>
-                            Pump 1
-                        </option>
-
-                        <option>
-                            Pump 2
-                        </option>
-
-                    </select>
-
-
-                    <button id="exportButton">
-                        Export
-                    </button>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- TABLE -->
-
-            <div class="table-wrapper">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-                                Date
-                            </th>
-
-                            <th>
-                                Time
-                            </th>
-
-                            <th>
-                                Event
-                            </th>
-
-                            <th>
-                                Pump
-                            </th>
-
-                            <th>
-                                Duration
-                            </th>
-
-                            <th>
-                                Flow Rate
-                            </th>
-
-                            <th>
-                                Water Used
-                            </th>
-
-                            <th>
-                                Status
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody id="historyTableBody">
-
-
-                        <tr>
-
-                            <td>
-                                17 Aug 2026
-                            </td>
-
-                            <td>
-                                08:30 PM
-                            </td>
-
-                            <td class="stop-event">
-                                Pump Stopped
-                            </td>
-
-                            <td>
-                                Pump 1
-                            </td>
-
-                            <td>
-                                15 min
-                            </td>
-
-                            <td>
-                                10.4 L/min
-                            </td>
-
-                            <td>
-                                80 L
-                            </td>
-
-                            <td>
-
-                                <span class="history-badge">
-                                    Completed
-                                </span>
-
-                            </td>
-
-                        </tr>
-
-
-                        <tr>
-
-                            <td>
-                                17 Aug 2026
-                            </td>
-
-                            <td>
-                                08:15 PM
-                            </td>
-
-                            <td class="start-event">
-                                Pump Started
-                            </td>
-
-                            <td>
-                                Pump 1
-                            </td>
-
-                            <td>
-                                15 min
-                            </td>
-
-                            <td>
-                                10.4 L/min
-                            </td>
-
-                            <td>
-                                80 L
-                            </td>
-
-                            <td>
-
-                                <span class="history-badge">
-                                    Completed
-                                </span>
-
-                            </td>
-
-                        </tr>
-
-
-                        <tr>
-
-                            <td>
-                                17 Aug 2026
-                            </td>
-
-                            <td>
-                                06:45 PM
-                            </td>
-
-                            <td class="stop-event">
-                                Pump Stopped
-                            </td>
-
-                            <td>
-                                Pump 2
-                            </td>
-
-                            <td>
-                                20 min
-                            </td>
-
-                            <td>
-                                11.2 L/min
-                            </td>
-
-                            <td>
-                                120 L
-                            </td>
-
-                            <td>
-
-                                <span class="history-badge">
-                                    Completed
-                                </span>
-
-                            </td>
-
-                        </tr>
-
-
-                        <tr>
-
-                            <td>
-                                17 Aug 2026
-                            </td>
-
-                            <td>
-                                06:25 PM
-                            </td>
-
-                            <td class="start-event">
-                                Pump Started
-                            </td>
-
-                            <td>
-                                Pump 2
-                            </td>
-
-                            <td>
-                                20 min
-                            </td>
-
-                            <td>
-                                11.2 L/min
-                            </td>
-
-                            <td>
-                                120 L
-                            </td>
-
-                            <td>
-
-                                <span class="history-badge">
-                                    Completed
-                                </span>
-
-                            </td>
-
-                        </tr>
-
-
-                        <tr>
-
-                            <td>
-                                17 Aug 2026
-                            </td>
-
-                            <td>
-                                03:20 PM
-                            </td>
-
-                            <td class="stop-event">
-                                Pump Stopped
-                            </td>
-
-                            <td>
-                                Pump 1
-                            </td>
-
-                            <td>
-                                30 min
-                            </td>
-
-                            <td>
-                                8.7 L/min
-                            </td>
-
-                            <td>
-                                110 L
-                            </td>
-
-                            <td>
-
-                                <span class="history-badge">
-                                    Completed
-                                </span>
-
-                            </td>
-
-                        </tr>
-
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-
-
-            <!-- PAGINATION -->
-
-            <div class="pagination">
-
-                <span>
-                    Showing 1–5 of 24 records
-                </span>
-
-
-                <div>
-
-                    <button>
-                        ‹
-                    </button>
-
-                    <button class="current-page">
-                        1
-                    </button>
-
-                    <button>
-                        2
-                    </button>
-
-                    <button>
-                        3
-                    </button>
-
-                    <button>
-                        4
-                    </button>
-
-                    <button>
-                        ›
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
+        
+<section class="page-header">
+    <div>
+        <h1>History</h1>
+        <p>Review recent pump operations and water usage</p>
+    </div>
+</section>
+
+<section class="panel history-panel">
+    <div class="history-summary">
+        <div class="history-summary-item">
+            <span>Total Water Used Today</span>
+            <strong>125 L</strong>
+        </div>
+        <div class="history-summary-item">
+            <span>Pump Operations</span>
+            <strong>4</strong>
+        </div>
+        <div class="history-summary-item">
+            <span>Total Runtime</span>
+            <strong>35 min</strong>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Event</th>
+                    <th>Pump</th>
+                    <th>Duration</th>
+                    <th>Water Used</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>14 Sep 2026</td><td>08:30 PM</td><td class="event-stop">Pump Stopped</td><td>Pump 1</td><td>15 min</td><td>80 L</td><td><span class="badge success">Completed</span></td></tr>
+                <tr><td>14 Sep 2026</td><td>08:15 PM</td><td class="event-start">Pump Started</td><td>Pump 1</td><td>--</td><td>--</td><td><span class="badge success">Completed</span></td></tr>
+                <tr><td>14 Sep 2026</td><td>06:45 PM</td><td class="event-stop">Pump Stopped</td><td>Pump 2</td><td>20 min</td><td>120 L</td><td><span class="badge success">Completed</span></td></tr>
+                <tr><td>14 Sep 2026</td><td>06:25 PM</td><td class="event-start">Pump Started</td><td>Pump 2</td><td>--</td><td>--</td><td><span class="badge success">Completed</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
 
     </main>
 
-
+    <script src="js/history.js"></script>
 </body>
-
 </html>
