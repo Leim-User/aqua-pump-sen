@@ -1042,10 +1042,150 @@ td {
     font-size: 17px;
 }
 
+/* START LOGIN AND SIGN UP */
+
+.login-container,.signup-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.login-card, .signup-card {
+    width: 100%;
+    max-width: 400px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 35px;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: var(--blue);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo h1 {
+    font-size: 23px;
+}
+
+.logo p,
+.login-heading p, .signup-heading p {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.logo p {
+    margin-top: 4px;
+}
+
+.login-heading, .signup-heading {
+    margin-bottom: 25px;
+}
+
+.login-heading h2, .signup-heading h2 {
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    background: var(--panel-light);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    color: white;
+    font-size: 12px;
+    outline: none;
+}
+
+.form-group input::placeholder {
+    color: #647a94;
+}
+
+.form-group input:focus {
+    border-color: var(--blue);
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0 20px;
+    font-size: 10px;
+}
+
+.accountStatus {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+}
+
+.form-options a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+.login-button, .signup-button {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 7px;
+    background: var(--blue);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-button:hover, .signup-button:hover {
+    filter: brightness(1.08);
+}
+
+.login-message {
+    min-height: 16px;
+    margin-top: 12px;
+    text-align: center;
+    font-size: 10px;
+}
+
+.footer-text {
+    margin-top: 25px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 9px;
+}
+
+/* END LOGIN */
+
 
 /* RESPONSIVENESS */
-
-/* RESPONSIVE */
 
 @media (max-width: 1000px) {
     .statistics-grid {
@@ -1130,5 +1270,11 @@ td {
     .water-level-panel {
         height: auto;
         padding: 25px 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-card {
+        padding: 28px 22px;
     }
 }
