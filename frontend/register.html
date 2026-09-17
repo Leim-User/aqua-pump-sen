@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Aqua Pump</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/aq.png">
+</head>
+<body>
+    <main class="signup-container">
+        <section class="signup-card">
+
+            <div class="logo">
+                <div class="logo-icon">#</div>
+                <h1>Aqua Pump</h1>
+                <p>Smart Water System</p>
+            </div>
+
+            <div class="signup-heading">
+                <h2>Welcome Back</h2>
+                <p>Sign up to access your dashboard</p>
+            </div>
+
+            <form id="signUpForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name"
+                           placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="name"
+                           placeholder="@username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tel">Contact</label>
+                    <input type="tel" id="name"
+                           placeholder="698 765 432" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email"
+                           placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password"
+                           placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="signup-button">
+                    Sign Up
+                </button>
+
+                <div class="form-options">
+                    <label class="accountStatus">
+                        <span>Already have an account?</span>
+                    </label>
+                    <a href="login.html" id="register">Login</a>
+                </div>
+
+
+                <p id="loginMessage" class="login-message"></p>
+            </form>
+
+            <p class="footer-text">Aqua Pump &copy; 2026</p>
+        </section>
+    </main>
+
+    <script src="js/login.js"></script>
+</body>
+</html>
