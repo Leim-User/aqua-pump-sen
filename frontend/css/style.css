@@ -710,3 +710,146 @@ td {
     font-size: 8px;
     white-space: nowrap;
 }
+
+
+/* CONTROL PAGE */
+
+.control-page-grid {
+    padding: 0 30px 18px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 18px;
+}
+
+.large-control-panel {
+    min-height: 300px;
+}
+
+.pump-state {
+    background: var(--panel-light);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.pump-state-label {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.pump-state strong {
+    color: var(--orange);
+    font-size: 16px;
+}
+
+.pump-buttons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.pump-buttons .control-button {
+    flex: 1;
+}
+
+.condition-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.condition-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--panel-light);
+    border: 1px solid var(--border);
+    padding: 12px;
+    border-radius: 7px;
+}
+
+.condition-item div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.condition-item strong {
+    font-size: 11px;
+}
+
+.condition-item span {
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.condition-ok {
+    color: var(--green) !important;
+}
+
+.condition-warning {
+    color: var(--orange) !important;
+}
+
+.condition-danger {
+    color: var(--red) !important;
+}
+
+.sensor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.sensor-card {
+    background: var(--panel-light);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.sensor-card span {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.sensor-card strong {
+    font-size: 15px;
+}
+
+.control-notice {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.notice-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(245, 166, 35, 0.15);
+    color: var(--orange);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.control-notice strong {
+    font-size: 12px;
+}
+
+.control-notice p {
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 5px;
+    line-height: 1.5;
+}

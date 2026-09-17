@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Panel | Aqua Pump</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+<aside class="sidebar">
+    <div class="brand">
+        <div class="brand-icon">#</div>
+        <div>
+            <h2>Aqua Pump</h2>
+            <span>Smart Water System</span>
+        </div>
+    </div>
+
+    <nav class="navigation">
+        <a href="index.html" class="nav-link ">
+            <span>&gt;</span> Dashboard
+        </a>
+        <a href="control.html" class="nav-link active">
+            <span>&gt;</span> Control Panel
+        </a>
+        <a href="history.html" class="nav-link ">
+            <span>&gt;</span> History
+        </a>
+        <a href="alerts.html" class="nav-link ">
+            <span>&gt;</span> Alerts &amp; System
+        </a>
+    </nav>
+
+    <div class="sidebar-status">
+        <div class="status-icon">●</div>
+        <div>
+            <strong>System Status</strong>
+            <p>All systems normal</p>
+        </div>
+    </div>
+
+    <div class="last-update">
+        <span>Last Update</span>
+        <strong id="lastUpdate">Just now</strong>
+    </div>
+</aside>
+
+
+    <main class="main-content">
+        <header class="topbar">
+            <button class="menu-button" id="menuButton" type="button">☰</button>
+            <div class="topbar-right">
+                <div class="system-online">
+                    <span class="online-dot"></span> System Online
+                </div>
+                <div class="notification">🔔 <span class="notification-count">0</span></div>
+                <div class="date-time">
+                    <strong id="currentDate">14 Sep 2026</strong>
+                    <span id="currentTime">12:00 AM</span>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar">A</div>
+                    <div>
+                        <strong>Admin</strong>
+                        <span>System Administrator</span>
+                    </div>
+                    <span>⌄</span>
+                </div>
+            </div>
+        </header>
+
+        
+<section class="page-header">
+    <div>
+        <h1>Control Panel</h1>
+        <p>Monitor and control the pumping system</p>
+    </div>
+</section>
+
+<section class="control-page-grid">
+    <div class="panel large-control-panel">
+        <div class="panel-header">
+            <div>
+                <h2>Pump Control</h2>
+                <span>Commands will later be sent through the PHP backend</span>
+            </div>
+        </div>
+
+        <div class="pump-state">
+            <span class="pump-state-label">Current Pump State</span>
+            <strong id="controlPumpState">STOPPED</strong>
+        </div>
+
+        <div class="pump-buttons">
+            <button id="controlStartPump" class="control-button start-button" type="button">START PUMP</button>
+            <button id="controlStopPump" class="control-button stop-button" type="button">STOP PUMP</button>
+        </div>
+
+        <div class="control-message" id="controlPageMessage">
+            Demo mode: this button currently changes the frontend state only.
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Safety Conditions</h2>
+                <span>Before a real command is accepted</span>
+            </div>
+        </div>
+
+        <div class="condition-list">
+            <div class="condition-item">
+                <div><strong>Water Level</strong><span>1875 / 2500 L</span></div>
+                <strong class="condition-ok">SAFE</strong>
+            </div>
+            <div class="condition-item">
+                <div><strong>Pump Availability</strong><span>Pump ready</span></div>
+                <strong class="condition-ok">AVAILABLE</strong>
+            </div>
+            <div class="condition-item">
+                <div><strong>System Connection</strong><span>ESP32 controller</span></div>
+                <strong class="condition-ok">ONLINE</strong>
+            </div>
+            <div class="condition-item">
+                <div><strong>Safety Status</strong><span>No active fault</span></div>
+                <strong class="condition-ok">NORMAL</strong>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="control-page-grid">
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Current Readings</h2>
+                <span>Sensor and controller values</span>
+            </div>
+        </div>
+
+        <div class="sensor-grid">
+            <div class="sensor-card"><span>Water Level</span><strong>1875 L</strong></div>
+            <div class="sensor-card"><span>Flow Rate</span><strong>0 L/min</strong></div>
+            <div class="sensor-card"><span>Pump</span><strong id="readingPump">STOPPED</strong></div>
+            <div class="sensor-card"><span>Controller</span><strong>ESP32</strong></div>
+        </div>
+    </div>
+
+    <div class="panel control-notice">
+        <div class="notice-icon">!</div>
+        <div>
+            <strong>Safety Notice</strong>
+            <p>
+                In the final system, the PHP backend will validate authentication,
+                authorization, water level, pump availability and safety conditions
+                before sending a command to the ESP32.
+            </p>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <script src="js/control.js"></script>
+</body>
+</html>
