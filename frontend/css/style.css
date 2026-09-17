@@ -854,6 +854,163 @@ td {
     line-height: 1.5;
 }
 
+
+/* ALERTS */
+
+.system-overview-grid {
+    padding: 0 30px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 18px;
+}
+
+.health-good {
+    color: var(--green);
+    font-size: 11px;
+}
+
+.health-meter {
+    width: 100%;
+    height: 8px;
+    background: #1c2b40;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 20px 0 12px;
+}
+
+.health-progress {
+    width: 94%;
+    height: 100%;
+    background: var(--green);
+    border-radius: 10px;
+}
+
+.health-description {
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.alert-counts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.alert-counts div {
+    background: var(--panel-light);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.alert-counts strong {
+    font-size: 20px;
+}
+
+.alert-counts span {
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.alerts-list-panel {
+    margin: 18px 30px 0;
+}
+
+.system-alert {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: var(--panel-light);
+}
+
+.alert-symbol {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.system-alert.critical .alert-symbol {
+    background: rgba(239, 68, 68, .15);
+    color: var(--red);
+}
+
+.system-alert.warning .alert-symbol {
+    background: rgba(245, 166, 35, .15);
+    color: var(--orange);
+}
+
+.system-alert.normal .alert-symbol {
+    background: rgba(24, 200, 137, .15);
+    color: var(--green);
+}
+
+.alert-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.alert-content strong {
+    font-size: 11px;
+}
+
+.alert-content p {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.alert-content small,
+.alert-time {
+    color: var(--muted);
+    font-size: 8px;
+}
+
+.sensor-health-panel {
+    margin: 18px 30px 30px;
+}
+
+.hardware-status-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.hardware-status {
+    background: var(--panel-light);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.hardware-status span {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.hardware-status strong {
+    color: var(--green);
+    font-size: 11px;
+}
+
+
 /* HISTORY PAGE */
 
 .history-panel {
