@@ -1041,3 +1041,94 @@ td {
     margin-top: 7px;
     font-size: 17px;
 }
+
+
+/* RESPONSIVENESS */
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+    .statistics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .monitoring-grid,
+    .bottom-grid,
+    .control-page-grid,
+    .system-overview-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hardware-status-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: .3s;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .topbar {
+        padding: 0 15px;
+    }
+
+    .topbar-right {
+        gap: 12px;
+    }
+
+    .system-online,
+    .date-time {
+        display: none;
+    }
+
+    .statistics-grid {
+        grid-template-columns: 1fr 1fr;
+        padding: 0 15px;
+    }
+
+    .monitoring-grid,
+    .bottom-grid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .control-page-grid,
+    .system-overview-grid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .alerts-list-panel,
+    .sensor-health-panel,
+    .history-panel {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .hardware-status-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pump-buttons {
+        flex-direction: column;
+    }
+
+    .history-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .water-level-panel {
+        height: auto;
+        padding: 25px 18px;
+    }
+}
