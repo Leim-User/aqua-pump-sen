@@ -24,7 +24,7 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: arial;
     background: var(--background);
     color: var(--text);
     min-height: 100vh;
@@ -1061,22 +1061,8 @@ td {
     padding: 35px;
 }
 
-.logo {
+.signup-heading h1 {
     text-align: center;
-    margin-bottom: 30px;
-}
-
-.logo-icon {
-    width: 48px;
-    height: 48px;
-    margin: 0 auto 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    background: var(--blue);
-    font-size: 24px;
-    font-weight: bold;
 }
 
 .logo h1 {
