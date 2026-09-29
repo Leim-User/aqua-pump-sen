@@ -42,7 +42,7 @@ if (isset($_SESSION["user"])) {
         if ($assResult) {
             if(password_verify($password, $assResult["password"])) {
                 $_SESSION["user"] = "yes";
-                $_SESSION["user_id"] = $assResult["user_id"] ?? $assResult["id"];
+                $_SESSION["user_id"] = $assResult["user_id"];
                 $_SESSION["full_name"] = $assResult["full_name"] ?? "";
                 header("Location: index.php");
                 exit();
