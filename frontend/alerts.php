@@ -1,10 +1,18 @@
+<?php
+session_start();
 
+if (!isset($_SESSION["user"])) {
+    header("Location: login.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alerts & System | Aqua Pump</title>
+    <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="assets/aq.png">
 </head>
@@ -15,21 +23,21 @@
         <div class="brand-icon">#</div>
         <div>
             <h2>Aqua Pump</h2>
-            <span>Smart Water System</span>
+            <span>Smart Water Management System</span>
         </div>
     </div>
 
     <nav class="navigation">
-        <a href="index.html" class="nav-link ">
+        <a href="index.php" class="nav-link active">
             <span>&gt;</span> Dashboard
         </a>
-        <a href="control.html" class="nav-link ">
+        <a href="control.php" class="nav-link ">
             <span>&gt;</span> Control Panel
         </a>
-        <a href="history.html" class="nav-link ">
+        <a href="history.php" class="nav-link ">
             <span>&gt;</span> History
         </a>
-        <a href="alerts.html" class="nav-link active">
+        <a href="alerts.php" class="nav-link ">
             <span>&gt;</span> Alerts &amp; System
         </a>
     </nav>
@@ -43,8 +51,7 @@
     </div>
 
     <div class="last-update">
-        <span>Last Update</span>
-        <strong id="lastUpdate">Just now</strong>
+        <a href="logout.php" class="btn btn-warning">Logout</a>
     </div>
 </aside>
 
