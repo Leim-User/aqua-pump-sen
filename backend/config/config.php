@@ -11,4 +11,6 @@ if (!$connect) {
     dir("Something went wrong!");
 }
 
+mysqli_set_charset($connect, "utf8mb4");
+
 ?>

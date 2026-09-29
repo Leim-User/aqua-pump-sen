@@ -3,6 +3,7 @@ session_start();
 
 if (isset($_SESSION["user"])) {
     header("Location: index.php");
+    exit();
 }
 
 ?>
@@ -25,17 +26,25 @@ if (isset($_SESSION["user"])) {
 
         require_once "../backend/config/config.php";
 
-        $sql = "SELECT * FROM users WHERE email = '$email'";
-        $query = mysqli_query($connect, $sql);
-        // Sicne I can't use the result of the $query directly, I'll convert it into an associative array, so I can get the data.
-        $assResult = mysqli_fetch_assoc($query);
+        $sql = "SELECT * FROM users WHERE email = ?";
+        
+        // Prepared statement
+        $stmt = mysqli_prepare($connect, $sql);
+        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_execute($stmt);
+
+        // Get the result of the statement
+        $result = mysqli_stmt_get_result($stmt);
+
+        // Now let's convert the result into an associative array
+        $assResult = mysqli_fetch_assoc($result);
 
         if ($assResult) {
             if(password_verify($password, $assResult["password"])) {
-                session_start();
                 $_SESSION["user"] = "yes";
+                $_SESSION["user_id"] = $assResult["user_id"];
                 header("Location: index.php");
-                dir();
+                exit();
             }
             else {
                  echo "<div class='alert alert-danger'>Password not matched</div>";
