@@ -253,7 +253,6 @@ $total_runtime = $total_assoc_runtime["total_runtime"];
                     </table>
                 </div>
             </section>
-
         </main>
     </body>
 </html>
