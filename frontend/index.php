@@ -3,6 +3,7 @@ session_start();
 
 if (!isset($_SESSION["user"])) {
     header("Location: login.php");
+    exit();
 }
 
 ?>
@@ -274,7 +275,5 @@ if (!isset($_SESSION["user"])) {
 </section>
 
     </main>
-
-    <script src="js/dashboard.js"></script>
 </body>
 </html>
