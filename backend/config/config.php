@@ -1,25 +1,23 @@
 <?php
 
-// ── Environment Detection ───────────────────────────────────
-// Automatically switches between local (XAMPP) and AwardSpace.
-// After creating your AwardSpace database, fill in the values below.
+// ****** LOCALHOST ******
+// $dbHost = "localhost";
+// $dbUser = "root";
+// $dbPass = "";
+// $dbName = "aqua_pump";
 
-if (strpos($_SERVER['HTTP_HOST'] ?? '', 'atwebpages.com') !== false) {
-    $dbHost = getenv("DB_HOST");
-    $dbUser = getenv("DB_USER");
-    $dbPass = getenv("DB_PASSWORD");
-    $dbName = getenv("DB_NAME");
-    $dbPort = getenv("DB_PORT") ?: 3306;
-} else {
-    // ── Local Development (XAMPP) ────────────────────────────
-    $dbHost = "localhost";
-    $dbUser = "root";
-    $dbPass = "";
-    $dbName = "aqua_pump";
-}
+// ProFreeHost connection credentials
+$dbHost = "sql303.ezyro.com";
+$dbUser = "ezyro_43101506";
+$dbPass = "#Lema@1309";
+$dbName = "ezyro_43101506_aqua_pump";
 
-$connect = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName, $dbPort);
+// Make mysqli throw exceptions on errors so we can catch them below.
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-if (!$connect) {
-    die("Something went wrong!");
+try {
+    $connect = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
+    mysqli_set_charset($connect, "utf8mb4");
+} catch (mysqli_sql_exception $e) {
+    die("Database connection failed: " . htmlspecialchars($e->getMessage()));
 }
