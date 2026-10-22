@@ -6,7 +6,12 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 
-require "../backend/config/config.php";
+if ($_SERVER['HTTP_HOST' ?? ""] !== "localhost") {
+    require_once "/backend/config/config.php";
+} else {
+    require_once "../backend/config/config.php";
+
+}
 
 // Store user's details
 $user_id = $_SESSION["user_id"];
@@ -73,7 +78,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $sql_history = "INSERT INTO history (user_id, pump_id, event, duration, water_used, status) VALUES (?,?,?, NULL, NULL, ?)";
 
             $stmt_history = mysqli_prepare($connect, $sql_history);
-            mysqli_stmt_bind_param($stmt_history, "isss", $pump_id, $event, $status);
+
+            $pump_history_id = "Pump " . $pump_id;
+
+            mysqli_stmt_bind_param($stmt_history, "isss", $user_id, $pump_history_id, $event, $status);
 
             mysqli_stmt_execute($stmt_history);
 
@@ -118,11 +126,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $sql_history = "INSERT INTO history (user_id, pump_id, event, duration, water_used, status) VALUES (?,?,?,?,?,?)";
 
             $stmt_history = mysqli_prepare($connect, $sql_history);
-            mysqli_stmt_bind_param($stmt_history, "iisiis", $user_id, $pump_id, $event, $duration, $water_used, $status);
+
+            $pump_history_id = "Pump " . $pump_id;
+
+            mysqli_stmt_bind_param($stmt_history, "iisiis", $user_id, $pump_history_id, $event, $duration, $water_used, $status);
 
             mysqli_stmt_execute($stmt_history);
 
-            $_SESSION["control_messsage"] = "Pump stopped successfully.";
+            $_SESSION["control_message"] = "Pump stopped successfully.";
         }
     }
 
@@ -345,6 +356,9 @@ $current_status = $pump_assoc["status"];
         </section>
 
     </main>
+
+    <script src="js/sidebar.js"></script>
+
 </body>
 
 </html>

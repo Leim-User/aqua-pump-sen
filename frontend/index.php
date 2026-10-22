@@ -9,6 +9,7 @@ if (!isset($_SESSION["user"])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,44 +18,45 @@ if (!isset($_SESSION["user"])) {
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="assets/aqLogo.png">
 </head>
+
 <body>
-    
-<aside class="sidebar">
-    <div class="brand">
-        <div class="brand-icon">#</div>
-        <div>
-            <h2>Aqua Pump</h2>
-            <span>Smart Water Management System</span>
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">#</div>
+            <div>
+                <h2>Aqua Pump</h2>
+                <span>Smart Water Management System</span>
+            </div>
         </div>
-    </div>
 
-    <nav class="navigation">
-        <a href="index.php" class="nav-link active">
-            <span>&gt;</span> Dashboard
-        </a>
-        <a href="control.php" class="nav-link ">
-            <span>&gt;</span> Control Panel
-        </a>
-        <a href="history.php" class="nav-link ">
-            <span>&gt;</span> History
-        </a>
-        <a href="alerts.php" class="nav-link ">
-            <span>&gt;</span> Alerts &amp; System
-        </a>
-    </nav>
+        <nav class="navigation">
+            <a href="index.php" class="nav-link active">
+                <span>&gt;</span> Dashboard
+            </a>
+            <a href="control.php" class="nav-link ">
+                <span>&gt;</span> Control Panel
+            </a>
+            <a href="history.php" class="nav-link ">
+                <span>&gt;</span> History
+            </a>
+            <a href="alerts.php" class="nav-link ">
+                <span>&gt;</span> Alerts &amp; System
+            </a>
+        </nav>
 
-    <div class="sidebar-status">
-        <div class="status-icon">●</div>
-        <div>
-            <strong>System Status</strong>
-            <p>All systems normal</p>
+        <div class="sidebar-status">
+            <div class="status-icon">●</div>
+            <div>
+                <strong>System Status</strong>
+                <p>All systems normal</p>
+            </div>
         </div>
-    </div>
 
-    <div class="last-update">
-        <a href="logout.php" class="btn btn-warning">Logout</a>
-    </div>
-</aside>
+        <div class="last-update">
+            <a href="logout.php" class="btn btn-warning">Logout</a>
+        </div>
+    </aside>
 
 
     <main class="main-content">
@@ -80,200 +82,204 @@ if (!isset($_SESSION["user"])) {
             </div>
         </header>
 
-        
-<section class="page-header">
-    <div>
-        <h1>Dashboard</h1>
-        <p>Real-time overview of your water pumping system</p>
-    </div>
-</section>
 
-<section class="statistics-grid">
-    <div class="stat-card pump-card">
-        <div class="stat-info">
-            <span class="stat-label">Pump Status</span>
-            <strong id="pumpStatus">OFF</strong>
-            <small id="pumpMode">Standby Mode</small>
-        </div>
-        <div class="stat-icon blue">#</div>
-    </div>
-
-    <div class="stat-card flow-card">
-        <div class="stat-info">
-            <span class="stat-label">Flow Rate</span>
-            <strong id="flowRate">0 L/min</strong>
-            <small>Current Flow</small>
-        </div>
-        <div class="stat-icon green">=</div>
-    </div>
-
-    <div class="stat-card consumption-card">
-        <div class="stat-info">
-            <span class="stat-label">Today's Consumption</span>
-            <strong id="consumption">125 L</strong>
-            <small>Total Today</small>
-        </div>
-        <div class="stat-icon orange">#</div>
-    </div>
-
-    <div class="stat-card runtime-card">
-        <div class="stat-info">
-            <span class="stat-label">Runtime Today</span>
-            <strong id="runtime">00:00:00</strong>
-            <small>HH:MM:SS</small>
-        </div>
-        <div class="stat-icon purple">@</div>
-    </div>
-</section>
-
-<section class="monitoring-grid">
-    <div class="panel water-level-panel">
-        <div>
-            <div class="panel-header">
-                <h2>Water Level</h2>
+        <section class="page-header">
+            <div>
+                <h1>Dashboard</h1>
+                <p>Real-time overview of your water pumping system</p>
             </div>
-            <div class="water-level-panel">
-                <div class="gauge" id="waterGauge">
-                    <div class="gauge-content">
-                        <strong id="waterLevel">75%</strong>
-                        <span id="waterAmount">1875 / 2500 L</span>
+        </section>
+
+        <section class="statistics-grid">
+            <div class="stat-card pump-card">
+                <div class="stat-info">
+                    <span class="stat-label">Pump Status</span>
+                    <strong id="pumpStatus">OFF</strong>
+                    <small id="pumpMode">Standby Mode</small>
+                </div>
+                <div class="stat-icon blue">#</div>
+            </div>
+
+            <div class="stat-card flow-card">
+                <div class="stat-info">
+                    <span class="stat-label">Flow Rate</span>
+                    <strong id="flowRate">0 L/min</strong>
+                    <small>Current Flow</small>
+                </div>
+                <div class="stat-icon green">=</div>
+            </div>
+
+            <div class="stat-card consumption-card">
+                <div class="stat-info">
+                    <span class="stat-label">Today's Consumption</span>
+                    <strong id="consumption">125 L</strong>
+                    <small>Total Today</small>
+                </div>
+                <div class="stat-icon orange">#</div>
+            </div>
+
+            <div class="stat-card runtime-card">
+                <div class="stat-info">
+                    <span class="stat-label">Runtime Today</span>
+                    <strong id="runtime">00:00:00</strong>
+                    <small>HH:MM:SS</small>
+                </div>
+                <div class="stat-icon purple">@</div>
+            </div>
+        </section>
+
+        <section class="monitoring-grid">
+            <div class="panel water-level-panel">
+                <div>
+                    <div class="panel-header">
+                        <h2>Water Level</h2>
+                    </div>
+                    <div class="water-level-panel">
+                        <div class="gauge" id="waterGauge">
+                            <div class="gauge-content">
+                                <strong id="waterLevel">75%</strong>
+                                <span id="waterAmount">1875 / 2500 L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="water-status">
+                        <span>Reservoir Level</span>
+                        <strong id="waterStatusText">Normal</strong>
                     </div>
                 </div>
             </div>
-            <div class="water-status">
-                <span>Reservoir Level</span>
-                <strong id="waterStatusText">Normal</strong>
+
+            <div class="panel control-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Quick Pump Control</h2>
+                        <span>Frontend demo until PHP API is connected</span>
+                    </div>
+                </div>
+
+                <button id="startPump" class="control-button start-button" type="button">
+                    &gt; START PUMP
+                </button>
+
+                <button id="stopPump" class="control-button stop-button" type="button" style="margin-top:10px;">
+                    ■ STOP PUMP
+                </button>
+
+                <div class="control-status">
+                    <span class="status-indicator"></span>
+                    <div>
+                        <small>Control Status</small>
+                        <p id="controlMessage">Pump is currently stopped</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <div class="panel control-panel">
-        <div class="panel-header">
-            <div>
-                <h2>Quick Pump Control</h2>
-                <span>Frontend demo until PHP API is connected</span>
+            <div class="panel overview-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>System Overview</h2>
+                        <span>Current readings</span>
+                    </div>
+                </div>
+
+                <div class="overview-list">
+                    <div class="overview-row"><span>Tank Capacity</span><strong>2500 L</strong></div>
+                    <div class="overview-row"><span>Current Water</span><strong id="overviewWater">1875 L</strong></div>
+                    <div class="overview-row"><span>Flow Rate</span><strong id="overviewFlow">0 L/min</strong></div>
+                    <div class="overview-row"><span>Controller</span><strong>ESP32</strong></div>
+                    <div class="overview-row"><span>Connection</span><strong class="condition-ok">Online</strong></div>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <button id="startPump" class="control-button start-button" type="button">
-            &gt; START PUMP
-        </button>
+        <section class="bottom-grid">
+            <div class="panel activity-panel">
+                <div class="panel-header">
+                    <h2>Recent Activity</h2>
+                </div>
 
-        <button id="stopPump" class="control-button stop-button" type="button" style="margin-top:10px;">
-            ■ STOP PUMP
-        </button>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Event</th>
+                                <th>Pump</th>
+                                <th>Duration</th>
+                                <th>Water Used</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="activityTable">
+                            <tr>
+                                <td>08:30 PM</td>
+                                <td class="event-stop">Pump Stopped</td>
+                                <td>Pump 1</td>
+                                <td>15 min</td>
+                                <td>80 L</td>
+                                <td><span class="badge success">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>08:15 PM</td>
+                                <td class="event-start">Pump Started</td>
+                                <td>Pump 1</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td><span class="badge success">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>06:45 PM</td>
+                                <td class="event-stop">Pump Stopped</td>
+                                <td>Pump 2</td>
+                                <td>20 min</td>
+                                <td>120 L</td>
+                                <td><span class="badge success">Completed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-        <div class="control-status">
-            <span class="status-indicator"></span>
-            <div>
-                <small>Control Status</small>
-                <p id="controlMessage">Pump is currently stopped</p>
+                <a href="history.html" class="view-history">View Full History →</a>
             </div>
-        </div>
-    </div>
 
-    <div class="panel overview-panel">
-        <div class="panel-header">
-            <div>
-                <h2>System Overview</h2>
-                <span>Current readings</span>
+            <div class="panel alerts-panel">
+                <div class="panel-header">
+                    <h2>System Alerts</h2>
+                </div>
+
+                <div class="alert-item">
+                    <div class="alert-icon green">✓</div>
+                    <div>
+                        <strong>All systems normal</strong>
+                        <p>No active critical alerts</p>
+                    </div>
+                    <span>10:40 PM</span>
+                </div>
+
+                <div class="alert-item">
+                    <div class="alert-icon orange">!</div>
+                    <div>
+                        <strong>Water level normal</strong>
+                        <p>Reservoir is within safe range</p>
+                    </div>
+                    <span>10:40 PM</span>
+                </div>
+
+                <div class="alert-item">
+                    <div class="alert-icon blue">i</div>
+                    <div>
+                        <strong>System check completed</strong>
+                        <p>All sensors are functioning</p>
+                    </div>
+                    <span>10:35 PM</span>
+                </div>
             </div>
-        </div>
-
-        <div class="overview-list">
-            <div class="overview-row"><span>Tank Capacity</span><strong>2500 L</strong></div>
-            <div class="overview-row"><span>Current Water</span><strong id="overviewWater">1875 L</strong></div>
-            <div class="overview-row"><span>Flow Rate</span><strong id="overviewFlow">0 L/min</strong></div>
-            <div class="overview-row"><span>Controller</span><strong>ESP32</strong></div>
-            <div class="overview-row"><span>Connection</span><strong class="condition-ok">Online</strong></div>
-        </div>
-    </div>
-</section>
-
-<section class="bottom-grid">
-    <div class="panel activity-panel">
-        <div class="panel-header">
-            <h2>Recent Activity</h2>
-        </div>
-
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Time</th>
-                        <th>Event</th>
-                        <th>Pump</th>
-                        <th>Duration</th>
-                        <th>Water Used</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody id="activityTable">
-                    <tr>
-                        <td>08:30 PM</td>
-                        <td class="event-stop">Pump Stopped</td>
-                        <td>Pump 1</td>
-                        <td>15 min</td>
-                        <td>80 L</td>
-                        <td><span class="badge success">Completed</span></td>
-                    </tr>
-                    <tr>
-                        <td>08:15 PM</td>
-                        <td class="event-start">Pump Started</td>
-                        <td>Pump 1</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td><span class="badge success">Completed</span></td>
-                    </tr>
-                    <tr>
-                        <td>06:45 PM</td>
-                        <td class="event-stop">Pump Stopped</td>
-                        <td>Pump 2</td>
-                        <td>20 min</td>
-                        <td>120 L</td>
-                        <td><span class="badge success">Completed</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <a href="history.html" class="view-history">View Full History →</a>
-    </div>
-
-    <div class="panel alerts-panel">
-        <div class="panel-header">
-            <h2>System Alerts</h2>
-        </div>
-
-        <div class="alert-item">
-            <div class="alert-icon green">✓</div>
-            <div>
-                <strong>All systems normal</strong>
-                <p>No active critical alerts</p>
-            </div>
-            <span>10:40 PM</span>
-        </div>
-
-        <div class="alert-item">
-            <div class="alert-icon orange">!</div>
-            <div>
-                <strong>Water level normal</strong>
-                <p>Reservoir is within safe range</p>
-            </div>
-            <span>10:40 PM</span>
-        </div>
-
-        <div class="alert-item">
-            <div class="alert-icon blue">i</div>
-            <div>
-                <strong>System check completed</strong>
-                <p>All sensors are functioning</p>
-            </div>
-            <span>10:35 PM</span>
-        </div>
-    </div>
-</section>
+        </section>
 
     </main>
+
+    <script src="js/sidebar.js"></script>
+
 </body>
+
 </html>

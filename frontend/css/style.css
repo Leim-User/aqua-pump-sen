@@ -705,7 +705,7 @@ td {
     line-height: 1.4;
 }
 
-.alert-item > span:last-child {
+.alert-item>span:last-child {
     color: var(--muted);
     font-size: 8px;
     white-space: nowrap;
@@ -1044,7 +1044,8 @@ td {
 
 /* START LOGIN AND SIGN UP */
 
-.login-container,.signup-container {
+.login-container,
+.signup-container {
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -1052,7 +1053,8 @@ td {
     padding: 20px;
 }
 
-.login-card, .signup-card {
+.login-card,
+.signup-card {
     width: 100%;
     max-width: 400px;
     background: var(--panel);
@@ -1070,7 +1072,8 @@ td {
 }
 
 .logo p,
-.login-heading p, .signup-heading p {
+.login-heading p,
+.signup-heading p {
     color: var(--muted);
     font-size: 11px;
 }
@@ -1079,11 +1082,13 @@ td {
     margin-top: 4px;
 }
 
-.login-heading, .signup-heading {
+.login-heading,
+.signup-heading {
     margin-bottom: 25px;
 }
 
-.login-heading h2, .signup-heading h2 {
+.login-heading h2,
+.signup-heading h2 {
     font-size: 20px;
     margin-bottom: 6px;
 }
@@ -1138,7 +1143,8 @@ td {
     text-decoration: none;
 }
 
-.login-button, .signup-button {
+.login-button,
+.signup-button {
     width: 100%;
     padding: 13px;
     border: none;
@@ -1150,7 +1156,8 @@ td {
     cursor: pointer;
 }
 
-.login-button:hover, .signup-button:hover {
+.login-button:hover,
+.signup-button:hover {
     filter: brightness(1.08);
 }
 
@@ -1262,5 +1269,44 @@ td {
 @media (max-width: 480px) {
     .login-card {
         padding: 28px 22px;
+    }
+}
+
+
+/* =========================================
+   SHARED RESPONSIVE SIDEBAR
+   ========================================= */
+
+/* Make the menu button clickable */
+.menu-button {
+    cursor: pointer;
+}
+
+/* Mobile sidebar behaviour */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        height: 100dvh;
+        overflow-y: auto;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar.sidebar-open {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .menu-button {
+        position: relative;
+        z-index: 1001;
     }
 }

@@ -15,7 +15,7 @@ if (isset($_POST["submit"])) {
     $password = $_POST["password"] ?? "";
     $passwordRepeat = $_POST["passwordRepeat"] ?? "";
 
-   
+
     if ($fname === "" || $email === "" || $password === "" || $passwordRepeat === "") {
         $errors[] = "All fields required";
     }
@@ -32,11 +32,17 @@ if (isset($_POST["submit"])) {
         $errors[] = "Password not matched";
     }
 
-    
-    if (empty($errors)) {
-        require_once __DIR__ . "/backend/config/config.php";
 
-        
+    if (empty($errors)) {
+
+        if ($_SERVER['HTTP_HOST' ?? ""] !== "localhost") {
+            require_once "/backend/config/config.php";
+        } else {
+            require_once "../backend/config/config.php";
+
+        }
+
+
         $stmt = mysqli_prepare($connect, "SELECT user_id FROM users WHERE email = ?");
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
@@ -48,7 +54,7 @@ if (isset($_POST["submit"])) {
         mysqli_stmt_close($stmt);
     }
 
-    
+
     if (empty($errors)) {
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
@@ -63,6 +69,7 @@ if (isset($_POST["submit"])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,6 +78,7 @@ if (isset($_POST["submit"])) {
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="assets/aq.png">
 </head>
+
 <body>
     <?php foreach ($errors as $err): ?>
         <div class="alert alert-danger"><?= htmlspecialchars($err) ?></div>
@@ -87,26 +95,23 @@ if (isset($_POST["submit"])) {
             <form action="register.php" method="POST">
                 <div class="form-group">
                     <label for="fname">Full Name</label>
-                    <input type="text" id="fname" name="fname"
-                           placeholder="Enter your name">
+                    <input type="text" id="fname" name="fname" placeholder="Enter your name">
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email"
-                           placeholder="Enter your email">
+                    <input type="email" id="email" name="email" placeholder="Enter your email">
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password"
-                           placeholder="Enter your password">
+                    <input type="password" id="password" name="password" placeholder="Enter your password">
                 </div>
 
                 <div class="form-group">
                     <label for="passwordRepeat">Confirm Password</label>
                     <input type="password" id="passwordRepeat" name="passwordRepeat"
-                           placeholder="Confirm your password">
+                        placeholder="Confirm your password">
                 </div>
 
                 <button type="submit" class="signup-button" name="submit">
@@ -123,4 +128,5 @@ if (isset($_POST["submit"])) {
         </section>
     </main>
 </body>
+
 </html>
