@@ -13,7 +13,12 @@ if (isset($_POST["login"])) {
     $email = trim($_POST["email"] ?? "");
     $password = $_POST["password"] ?? "";
 
-    require_once __DIR__ . "/backend/config/config.php";
+    if ($_SERVER['HTTP_HOST' ?? ""] !== "localhost") {
+        require_once "/backend/config/config.php";
+    } else {
+        require_once "../backend/config/config.php";
+    }
+
 
     $sql = "SELECT user_id, full_name, password FROM users WHERE email = ?";
     $stmt = mysqli_prepare($connect, $sql);
@@ -36,52 +41,53 @@ if (isset($_POST["login"])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login | Aqua Pump</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="icon" href="assets/aq.png">
-    </head>
-    <body>
-        <?php if ($error !== ""): ?>
-            <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
-        <?php endif; ?>
 
-        <main class="login-container">
-            <section class="login-card">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Aqua Pump</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/aq.png">
+</head>
 
-                <div class="login-heading">
-                    <h2>Login Form</h2>
-                    <p>Sign in to access your dashboard</p>
+<body>
+    <?php if ($error !== ""): ?>
+        <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+    <?php endif; ?>
+
+    <main class="login-container">
+        <section class="login-card">
+
+            <div class="login-heading">
+                <h2>Login Form</h2>
+                <p>Sign in to access your dashboard</p>
+            </div>
+
+            <form action="login.php" method="POST">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email">
                 </div>
 
-                <form action="login.php" method="POST">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email"
-                            placeholder="Enter your email">
-                    </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password">
+                </div>
 
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password"
-                            placeholder="Enter your password">
-                    </div>
+                <button type="submit" class="login-button" name="login">
+                    Sign In
+                </button>
 
-                    <button type="submit" class="login-button" name="login">
-                        Sign In
-                    </button>
+                <div class="form-options">
+                    <label class="accountStatus">
+                        <span>Don't yet have an account?</span>
+                    </label>
+                    <a href="register.php">Register</a>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
 
-                    <div class="form-options">
-                        <label class="accountStatus">
-                            <span>Don't yet have an account?</span>
-                        </label>
-                        <a href="register.php">Register</a>
-                    </div>
-                </form>
-            </section>
-        </main>
-    </body>
 </html>
