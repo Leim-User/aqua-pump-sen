@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2026 at 07:53 AM
+-- Generation Time: Oct 22, 2026 at 11:36 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `aqua_pump`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alerts`
+--
+
+CREATE TABLE `alerts` (
+  `alert_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `message` text NOT NULL,
+  `alert_type` varchar(20) NOT NULL DEFAULT 'NORMAL',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `alerts`
+--
+
+INSERT INTO `alerts` (`alert_id`, `user_id`, `title`, `message`, `alert_type`, `created_at`) VALUES
+(1, 1, 'All systems normal', 'No active critical alerts detected.', 'NORMAL', '2026-10-16 10:07:41'),
+(2, 1, 'Water level is normal', 'Reservoir is within the configured safe range.', 'NORMAL', '2026-10-16 10:07:41'),
+(3, 1, 'System check completed', 'All monitored sensors are functioning.', 'INFO', '2026-10-16 10:07:41');
 
 -- --------------------------------------------------------
 
@@ -54,7 +78,30 @@ INSERT INTO `history` (`history_id`, `user_id`, `pump_id`, `event`, `duration`, 
 (11, 4, 'PUMP-01', 'Pump Started', 25, 12.00, 'Completed', '2026-09-29 02:39:02'),
 (12, 4, 'PUMP-01', 'Pump Stopped', 10, 5.00, 'Completed', '2026-09-29 02:39:27'),
 (13, 4, 'PUMP-03', 'Pump Stopped', 15, 7.00, 'Completed', '2026-09-29 02:39:57'),
-(14, 3, '1', 'Pump Stopped', 15, 80.00, 'Completed', '2026-10-01 03:25:34');
+(14, 3, '1', 'Pump Stopped', 15, 80.00, 'Completed', '2026-10-01 03:25:34'),
+(15, 3, '1', 'Pump Stopped', 15, 80.00, 'Completed', '2026-10-03 06:09:11'),
+(16, 3, '1', 'Pump Stopped', 15, 80.00, 'Completed', '2026-10-03 13:03:34'),
+(17, 3, '1', 'Pump Stopped', 15, 80.00, 'Completed', '2026-10-03 13:16:55'),
+(18, 3, '1', 'Pump Stopped', 15, 80.00, 'Completed', '2026-10-22 08:23:37'),
+(19, 3, '1', 'Pump Stopped', 15, 80.00, 'Completed', '2026-10-22 08:30:37'),
+(20, 3, '1', 'Pump Started', NULL, NULL, 'Completed', '2026-10-22 08:30:39'),
+(21, 3, '1', 'Pump Stopped', 15, 80.00, 'Completed', '2026-10-22 08:30:40'),
+(22, 3, '1', 'Pump Started', NULL, NULL, 'Completed', '2026-10-22 08:30:41'),
+(23, 3, '1', 'Pump Stopped', 15, 80.00, 'Completed', '2026-10-22 08:30:42'),
+(24, 3, '1', 'Pump Started', NULL, NULL, 'Completed', '2026-10-22 08:30:43'),
+(25, 3, '1', 'Pump Stopped', 15, 80.00, 'Completed', '2026-10-22 08:30:44'),
+(26, 3, '1', 'Pump Started', NULL, NULL, 'Completed', '2026-10-22 08:30:45'),
+(27, 3, '1', 'Pump Stopped', 15, 80.00, 'Completed', '2026-10-22 08:30:46'),
+(28, 3, '1', 'Pump Started', NULL, NULL, 'Completed', '2026-10-22 08:30:47'),
+(29, 3, '0', 'Pump Stopped', 15, 80.00, 'Completed', '2026-10-22 08:40:13'),
+(30, 3, 'Pump 1', 'Pump Started', NULL, NULL, 'Completed', '2026-10-22 08:40:17'),
+(31, 3, '0', 'Pump Stopped', 15, 80.00, 'Completed', '2026-10-22 08:40:18'),
+(32, 3, 'Pump 1', 'Pump Started', NULL, NULL, 'Completed', '2026-10-22 08:40:24'),
+(33, 3, '0', 'Pump Stopped', 15, 80.00, 'Completed', '2026-10-22 08:40:25'),
+(34, 3, 'Pump 1', 'Pump Started', NULL, NULL, 'Completed', '2026-10-22 08:40:27'),
+(35, 3, '0', 'Pump Stopped', 15, 80.00, 'Completed', '2026-10-22 08:40:28'),
+(36, 3, 'Pump 1', 'Pump Started', NULL, NULL, 'Completed', '2026-10-22 08:41:31'),
+(37, 3, '0', 'Pump Stopped', 15, 80.00, 'Completed', '2026-10-22 08:41:53');
 
 -- --------------------------------------------------------
 
@@ -74,7 +121,7 @@ CREATE TABLE `pumps` (
 --
 
 INSERT INTO `pumps` (`pump_id`, `pump_name`, `status`, `created_at`) VALUES
-(1, 'Main Pump', 'RUNNING', '2026-10-01 02:01:38');
+(1, 'Main Pump', 'STOPPED', '2026-10-01 02:01:38');
 
 -- --------------------------------------------------------
 
@@ -103,6 +150,12 @@ INSERT INTO `users` (`user_id`, `full_name`, `email`, `password`) VALUES
 --
 
 --
+-- Indexes for table `alerts`
+--
+ALTER TABLE `alerts`
+  ADD PRIMARY KEY (`alert_id`);
+
+--
 -- Indexes for table `history`
 --
 ALTER TABLE `history`
@@ -126,10 +179,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `alerts`
+--
+ALTER TABLE `alerts`
+  MODIFY `alert_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `pumps`

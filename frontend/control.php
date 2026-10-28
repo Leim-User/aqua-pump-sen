@@ -129,7 +129,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $pump_history_id = "Pump " . $pump_id;
 
-            mysqli_stmt_bind_param($stmt_history, "iisiis", $user_id, $pump_history_id, $event, $duration, $water_used, $status);
+
+            mysqli_stmt_bind_param($stmt_history, "issids", $user_id, $pump_history_id, $event, $duration, $water_used, $status);
+
 
             mysqli_stmt_execute($stmt_history);
 
