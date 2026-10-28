@@ -7,7 +7,7 @@ if (!isset($_SESSION["user_id"])) {
 }
 
 // Connect to DB
-require_once "../config/config.php";
+require_once __DIR__ . "/../config/config.php";
 
 
 // Store user_id in a variable

@@ -239,7 +239,7 @@ if (!isset($_SESSION["user"])) {
                     </table>
                 </div>
 
-                <a href="history.html" class="view-history">View Full History →</a>
+                <a href="history.php" class="view-history">View Full History →</a>
             </div>
 
             <div class="panel alerts-panel">

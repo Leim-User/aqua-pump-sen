@@ -1,6 +1,7 @@
 <?php
 
-if ($_SERVER["HTTP_HOST" ?? ""] === "localhost") {
+$host = $_SERVER["HTTP_HOST"] ?? "";
+if ($host === "localhost" || strpos($host, "localhost:") === 0 || $host === "127.0.0.1" || strpos($host, "127.0.0.1:") === 0) {
     // ****** LOCALHOST ******
     $dbHost = "localhost";
     $dbUser = "root";

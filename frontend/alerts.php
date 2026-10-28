@@ -9,7 +9,7 @@ if (!isset($_SESSION["user_id"])) {
 if ($_SERVER['HTTP_HOST' ?? ""] !== "localhost") {
     require_once "/backend/config/config.php";
 } else {
-    require_once "../backend/config/config.php";
+    require_once "/../backend/config/config.php";
 }
 
 // Store user id in variable
@@ -162,7 +162,7 @@ $pump_controller_status = "READY";
                     </span></div>
                 <div class="date-time">
                     <strong id="currentDate"><?php echo date("d M Y"); ?></strong>
-                    <span id="currentTime"><?php date("h:i A"); ?></span>
+                    <span id="currentTime"><?php echo date("h:i A"); ?></span>
                 </div>
                 <div class="user-profile">
                     <div class="avatar">A</div>
@@ -191,7 +191,7 @@ $pump_controller_status = "READY";
                         <h2>System Health</h2>
                         <span>Overall operating condition</span>
                     </div>
-                    <strong class="<?php htmlspecialchars($health_class); ?>">
+                    <strong class="<?php echo htmlspecialchars($health_class); ?>">
                         <?php echo htmlspecialchars($system_health); ?>
                     </strong>
                 </div>
@@ -283,8 +283,7 @@ $pump_controller_status = "READY";
                     </div>
 
                 <?php endwhile; ?>
-
-                <?php ?>
+            <?php else: ?>
                 <div class="system-alert normal">
                     <div class="alert-symbol">✓</div>
                     <div class="alert-content">
@@ -294,7 +293,6 @@ $pump_controller_status = "READY";
                     </div>
                     <span class="alert-time">NORMAL</span>
                 </div>
-
             <?php endif; ?>
         </section>
 
