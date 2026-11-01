@@ -7,9 +7,9 @@ if (!isset($_SESSION["user_id"])) {
 }
 
 if ($_SERVER['HTTP_HOST' ?? ""] !== "localhost") {
-    require_once "/backend/config/config.php";
+    require_once "backend/config/config.php";
 } else {
-    require_once "/../backend/config/config.php";
+    require_once "../backend/config/config.php";
 }
 
 // Store user id in variable
