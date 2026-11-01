@@ -16,7 +16,7 @@ if (isset($_POST["login"])) {
     if ($_SERVER['HTTP_HOST' ?? ""] !== "localhost") {
         require_once "/backend/config/config.php";
     } else {
-        require_once __DIR__ . "../backend/config/config.php";
+        require_once "../backend/config/config.php";
     }
 
 
