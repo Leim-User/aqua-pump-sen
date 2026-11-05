@@ -6,172 +6,37 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 
-// if ($_SERVER['HTTP_HOST' ?? ""] !== "localhost") {
-// require_once "/backend/config/config.php";
-// } else {
 require_once "../backend/config/config.php";
 
-// }
-
-// Store user's details
 $user_id = $_SESSION["user_id"];
-
 $pump_id = 1;
 
+// Retrieve the latest pump state.
+// This page must NEVER modify the pump state.
 
-
-// GET THE CURRENT PUMP STATE
-
-$sql = "SELECT pump_id, pump_name, status FROM pumps WHERE pump_id = ?";
+$sql = "SELECT pump_id, pump_name, status
+        FROM pumps
+        WHERE pump_id = ?";
 
 $stmt = mysqli_prepare($connect, $sql);
 
 mysqli_stmt_bind_param($stmt, "i", $pump_id);
+
 mysqli_stmt_execute($stmt);
 
 $result = mysqli_stmt_get_result($stmt);
 
 $pump_assoc = mysqli_fetch_assoc($result);
 
-
-// CHECK IF THE PUMP EXISTS
+mysqli_stmt_close($stmt);
 
 if (!$pump_assoc) {
-    die("Pump not found");
+    die("Pump not found.");
 }
 
 $current_status = $pump_assoc["status"];
 
-
-// PROCESS THE PUMP COMMAND
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    $action = $_POST["action"] ?? "";
-
-
-    // START THE PUMP
-
-    if ($action === "start") {
-        if ($current_status === "RUNNING") {
-
-            $_SESSION["pump_message"] = "Pumpis already running";
-        } else {
-
-            $new_status = "RUNNING";
-
-
-            // Update pump state
-
-            $sql_update = "UPDATE pumps SET status = ? WHERE pump_id = ?";
-
-            $stmt_update = mysqli_prepare($connect, $sql_update);
-
-            mysqli_stmt_bind_param($stmt_update, "si", $new_status, $pump_id);
-
-            mysqli_stmt_execute($stmt_update);
-
-            // RECORD EVENT IN HOSTORY
-            $event = "Pump Started";
-            $status = "Completed";
-
-            $sql_history = "INSERT INTO history (user_id, pump_id, event, duration, water_used, status) VALUES (?,?,?, NULL, NULL, ?)";
-
-            $stmt_history = mysqli_prepare($connect, $sql_history);
-
-            $pump_history_id = "Pump " . $pump_id;
-
-            mysqli_stmt_bind_param($stmt_history, "isss", $user_id, $pump_history_id, $event, $status);
-
-            mysqli_stmt_execute($stmt_history);
-
-            $_SESSION["control_message"] = "Pump started successfully.";
-        }
-    }
-
-
-    // STOP THE PUMP
-    elseif ($action === "stop") {
-
-        if ($current_status === "STOPPED") {
-
-            $_SESSION["control_message"] = "Pump already stopped.";
-        } else {
-
-            $new_status = "STOPPED";
-
-
-            // Update  pump status
-
-            $sql_update = "UPDATE pumps SET status = ? WHERE pump_id = ?";
-
-            $stmt_update = mysqli_prepare($connect, $sql_update);
-            mysqli_stmt_bind_param($stmt_update, "si", $new_status, $pump_id);
-
-            mysqli_stmt_execute($stmt_update);
-
-
-
-            // TEMPORARY TEST VALUES 
-            // The actual duration and water usage will come from the pump, sensors and controllers.
-
-
-            $duration = 15;
-            $water_used = 80;
-
-            $event = "Pump Stopped";
-            $status = "Completed";
-
-            // Record the event in history
-            $sql_history = "INSERT INTO history (user_id, pump_id, event, duration, water_used, status) VALUES (?,?,?,?,?,?)";
-
-            $stmt_history = mysqli_prepare($connect, $sql_history);
-
-            $pump_history_id = "Pump " . $pump_id;
-
-
-            mysqli_stmt_bind_param($stmt_history, "issids", $user_id, $pump_history_id, $event, $duration, $water_used, $status);
-
-
-            mysqli_stmt_execute($stmt_history);
-
-            $_SESSION["control_message"] = "Pump stopped successfully.";
-        }
-    }
-
-    // IF PUMP COMMAND IS UNKNOWN
-    else {
-
-        $_SESSION["control_message"] = "Invalid pump command";
-    }
-
-    // PREVENT FORM RESUBMISSION
-
-    header("Location: control.php");
-    exit();
-}
-
-
-// DISPLAY THE MESSAGE STORED IN THE $_SESSION SUPERGLOBAL ARRAY
-
-$control_message = $_SESSION["control_message"] ?? "";
-unset($control_message);
-
-
-// REFRESH PUMP STATE AFTER COMMAND
-
-$sql_state = "SELECT pump_id, pump_name, status FROM pumps WHERE pump_id = ?";
-
-$stmt_state = mysqli_prepare($connect, $sql_state);
-mysqli_stmt_bind_param($stmt_state, "i", $pump_id);
-mysqli_stmt_execute($stmt_state);
-
-$result_state = mysqli_stmt_get_result($stmt_state);
-
-$pump_assoc = mysqli_fetch_assoc($result_state);
-
-$current_status = $pump_assoc["status"];
-
+mysqli_close($connect);
 ?>
 
 <!DOCTYPE html>
@@ -198,16 +63,16 @@ $current_status = $pump_assoc["status"];
         </div>
 
         <nav class="navigation">
-            <a href="index.php" class="nav-link active">
+            <a href="index.php" class="nav-link">
                 <span>&gt;</span> Dashboard
             </a>
-            <a href="control.php" class="nav-link ">
+            <a href="control.php" class="nav-link active">
                 <span>&gt;</span> Control Panel
             </a>
-            <a href="history.php" class="nav-link ">
+            <a href="history.php" class="nav-link">
                 <span>&gt;</span> History
             </a>
-            <a href="alerts.php" class="nav-link ">
+            <a href="alerts.php" class="nav-link">
                 <span>&gt;</span> Alerts &amp; System
             </a>
         </nav>
@@ -216,7 +81,7 @@ $current_status = $pump_assoc["status"];
             <div class="status-icon">●</div>
             <div>
                 <strong>System Status</strong>
-                <p>All systems normal</p>
+                <p>Monitoring active</p>
             </div>
         </div>
 
@@ -224,7 +89,6 @@ $current_status = $pump_assoc["status"];
             <a href="logout.php" class="btn btn-warning">Logout</a>
         </div>
     </aside>
-
 
     <main class="main-content">
         <header class="topbar">
@@ -237,7 +101,7 @@ $current_status = $pump_assoc["status"];
                 <div class="notification">🔔 <span class="notification-count">0</span></div>
                 <div class="date-time">
                     <strong id="currentDate"><?php echo date("d/M/Y"); ?></strong>
-                    <span id="currentTime"><?php echo date("H:i A"); ?></span>
+                    <span id="currentTime"><?php echo date("h:i A"); ?></span>
                 </div>
                 <div class="user-profile">
                     <div class="avatar">A</div>
@@ -250,83 +114,94 @@ $current_status = $pump_assoc["status"];
             </div>
         </header>
 
-
         <section class="page-header">
             <div>
                 <h1>Control Panel</h1>
-                <p>Monitor and control the pumping system</p>
+                <p>Monitor the automatic pumping system and its operations</p>
             </div>
         </section>
 
         <section class="control-page-grid">
+
             <div class="panel large-control-panel">
+
                 <div class="panel-header">
                     <div>
-                        <h2>Pump Control</h2>
-                        <span>Commands will later be sent through the PHP backend</span>
+                        <h2>Automatic Pump Monitoring</h2>
+                        <span>
+                            Pump operation is managed by the ESP32 controller.
+                        </span>
                     </div>
                 </div>
 
                 <div class="pump-state">
-                    <span class="pump-state-label">Current Pump State</span>
+                    <span class="pump-state-label">
+                        Current Pump State
+                    </span>
+
                     <strong id="controlPumpState">
                         <?php echo htmlspecialchars($current_status); ?>
                     </strong>
                 </div>
 
-                <div class="pump-buttons">
-                    <form action="control.php" method="POST">
-                        <input type="hidden" name="action" value="start">
-
-                        <button class="control-button start-button" type="submit">START PUMP</button>
-                    </form>
-
-                    <form action="control.php" method="POST">
-                        <input type="hidden" name="action" value="stop">
-
-                        <button class="control-button stop-button" type="submit">STOP PUMP</button>
-                    </form>
+                <div class="control-message">
+                    <p class="alert alert-info">
+                        Automatic filling mode is active.
+                        The ESP32 independently controls the pump
+                        according to sensor readings and safety conditions.
+                        Manual pump control is currently disabled.
+                    </p>
                 </div>
 
-                <div class="control-message" id="controlPageMessage">
-                    <?php if (!empty($control_message)): ?>
-                        <p class="alert alert-info"><?php echo htmlspecialchars($control_message); ?></p>
-                    <?php else: ?>
-                        <p class="alert alert-info">Pump is ready for operation</p>
-                    <?php endif; ?>
-                </div>
             </div>
 
             <div class="panel">
                 <div class="panel-header">
                     <div>
                         <h2>Safety Conditions</h2>
-                        <span>Before a real command is accepted</span>
+                        <span>Automatic operating conditions</span>
                     </div>
                 </div>
 
                 <div class="condition-list">
                     <div class="condition-item">
-                        <div><strong>Water Level</strong><span>1875 / 2500 L</span></div>
-                        <strong class="condition-ok">SAFE</strong>
+                        <div>
+                            <strong>Container Detection</strong>
+                            <span>IR sensor monitoring</span>
+                        </div>
+                        <strong id="safetyContainer">--</strong>
                     </div>
+
                     <div class="condition-item">
-                        <div><strong>Pump Availability</strong><span>Pump ready</span></div>
-                        <strong class="condition-ok">AVAILABLE</strong>
+                        <div>
+                            <strong>Ultrasonic Sensor</strong>
+                            <span>Distance monitoring</span>
+                        </div>
+                        <strong id="safetyUltrasonic">--</strong>
                     </div>
+
                     <div class="condition-item">
-                        <div><strong>System Connection</strong><span>ESP32 controller</span></div>
-                        <strong class="condition-ok">ONLINE</strong>
+                        <div>
+                            <strong>System Connection</strong>
+                            <span>ESP32 controller</span>
+                        </div>
+                        <strong id="safetyConnection">--</strong>
                     </div>
+
                     <div class="condition-item">
-                        <div><strong>Safety Status</strong><span>No active fault</span></div>
-                        <strong class="condition-ok">NORMAL</strong>
+                        <div>
+                            <strong>Safety Status</strong>
+                            <span>Controller fault monitoring</span>
+                        </div>
+                        <strong id="safetyFault">--</strong>
                     </div>
                 </div>
             </div>
+
         </section>
 
         <section class="control-page-grid">
+
             <div class="panel">
                 <div class="panel-header">
                     <div>
@@ -341,14 +216,19 @@ $current_status = $pump_assoc["status"];
                         <span>Ultrasonic Distance</span>
                         <strong id="readingDistance">-- cm</strong>
                     </div>
+
                     <div class="sensor-card">
                         <span>Container Detection</span>
                         <strong id="readingContainer">--</strong>
                     </div>
+
                     <div class="sensor-card">
                         <span>Pump Status</span>
-                        <strong id="readingPump">--</strong>
+                        <strong id="readingPump">
+                            <?php echo htmlspecialchars($current_status); ?>
+                        </strong>
                     </div>
+
                     <div class="sensor-card">
                         <span>Controller</span>
                         <strong id="readingController">OFFLINE</strong>
@@ -366,12 +246,13 @@ $current_status = $pump_assoc["status"];
                 <div>
                     <strong>Safety Notice</strong>
                     <p>
-                        In the final system, the PHP backend will validate authentication,
-                        authorization, water level, pump availability and safety conditions
-                        before sending a command to the ESP32.
+                        The ESP32 independently manages automatic pump operation.
+                        The dashboard is currently monitoring sensor readings
+                        and pump status. No manual pump commands are available.
                     </p>
                 </div>
             </div>
+
         </section>
 
     </main>
