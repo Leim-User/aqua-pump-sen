@@ -1,1 +1,4 @@
-/.hardware/
+# Ignored files
+backend/usage/test_api_wifi.php
+backend/usage/wifi_index.php
+
