@@ -13,11 +13,12 @@ if (isset($_POST["login"])) {
     $email = trim($_POST["email"] ?? "");
     $password = $_POST["password"] ?? "";
 
-    if ($_SERVER['HTTP_HOST' ?? ""] !== "localhost") {
-        require_once "/backend/config/config.php";
-    } else {
-        require_once "../backend/config/config.php";
-    }
+    // if ($_SERVER['HTTP_HOST' ?? ""] !== "localhost") {
+// require_once "/backend/config/config.php";
+// } else {
+    require_once "../backend/config/config.php";
+
+    // }
 
 
     $sql = "SELECT user_id, full_name, password FROM users WHERE email = ?";

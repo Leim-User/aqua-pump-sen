@@ -6,12 +6,12 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 
-if ($_SERVER['HTTP_HOST' ?? ""] !== "localhost") {
-    require_once "/backend/config/config.php";
-} else {
-    require_once "../backend/config/config.php";
+// if ($_SERVER['HTTP_HOST' ?? ""] !== "localhost") {
+// require_once "/backend/config/config.php";
+// } else {
+require_once "../backend/config/config.php";
 
-}
+// }
 
 $user_id = $_SESSION["user_id"];
 
