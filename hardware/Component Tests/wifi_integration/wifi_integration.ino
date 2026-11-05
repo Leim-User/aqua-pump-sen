@@ -23,8 +23,8 @@ const char* SERVER_URL =
 #define IR_PIN 27
 
 // Active LOW relay
-#define RELAY_ON LOW
-#define RELAY_OFF HIGH
+#define RELAY_ON HIGH
+#define RELAY_OFF LOW
 
 // IR sensor detection polarity
 #define IR_DETECTED LOW
