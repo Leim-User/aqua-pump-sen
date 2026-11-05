@@ -6,12 +6,12 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 
-if ($_SERVER['HTTP_HOST' ?? ""] !== "localhost") {
-    require_once "/backend/config/config.php";
-} else {
-    require_once "../backend/config/config.php";
+// if ($_SERVER['HTTP_HOST' ?? ""] !== "localhost") {
+// require_once "/backend/config/config.php";
+// } else {
+require_once "../backend/config/config.php";
 
-}
+// }
 
 // Store user's details
 $user_id = $_SESSION["user_id"];
@@ -231,12 +231,13 @@ $current_status = $pump_assoc["status"];
             <button class="menu-button" id="menuButton" type="button">☰</button>
             <div class="topbar-right">
                 <div class="system-online">
-                    <span class="online-dot"></span> System Online
+                    <span class="online-dot" id="deviceOnlineDot"></span>
+                    <span id="deviceOnlineText">Checking connection...</span>
                 </div>
                 <div class="notification">🔔 <span class="notification-count">0</span></div>
                 <div class="date-time">
-                    <strong id="currentDate">14 Sep 2026</strong>
-                    <span id="currentTime">12:00 AM</span>
+                    <strong id="currentDate"><?php echo date("d/M/Y"); ?></strong>
+                    <span id="currentTime"><?php echo date("H:i A"); ?></span>
                 </div>
                 <div class="user-profile">
                     <div class="avatar">A</div>
@@ -335,13 +336,29 @@ $current_status = $pump_assoc["status"];
                 </div>
 
                 <div class="sensor-grid">
-                    <div class="sensor-card"><span>Water Level</span><strong>1875 L</strong></div>
-                    <div class="sensor-card"><span>Flow Rate</span><strong>0 L/min</strong></div>
-                    <div class="sensor-card"><span>Pump</span><strong id="readingPump">
-                            <?php echo htmlspecialchars($current_status); ?>
-                        </strong></div>
-                    <div class="sensor-card"><span>Controller</span><strong>ESP32</strong></div>
+
+                    <div class="sensor-card">
+                        <span>Ultrasonic Distance</span>
+                        <strong id="readingDistance">-- cm</strong>
+                    </div>
+                    <div class="sensor-card">
+                        <span>Container Detection</span>
+                        <strong id="readingContainer">--</strong>
+                    </div>
+                    <div class="sensor-card">
+                        <span>Pump Status</span>
+                        <strong id="readingPump">--</strong>
+                    </div>
+                    <div class="sensor-card">
+                        <span>Controller</span>
+                        <strong id="readingController">OFFLINE</strong>
+                    </div>
+
                 </div>
+
+                <p class="text-muted mt-3" id="lastTelemetry">
+                    Waiting for ESP32 telemetry...
+                </p>
             </div>
 
             <div class="panel control-notice">
@@ -360,6 +377,7 @@ $current_status = $pump_assoc["status"];
     </main>
 
     <script src="js/sidebar.js"></script>
+    <script src="js/device-monitor.js"></script>
 
 </body>
 
