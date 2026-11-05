@@ -35,12 +35,12 @@ if (isset($_POST["submit"])) {
 
     if (empty($errors)) {
 
-        if ($_SERVER['HTTP_HOST' ?? ""] !== "localhost") {
-            require_once "/backend/config/config.php";
-        } else {
-            require_once "../backend/config/config.php";
+        // if ($_SERVER['HTTP_HOST' ?? ""] !== "localhost") {
+// require_once "/backend/config/config.php";
+// } else {
+        require_once "../backend/config/config.php";
 
-        }
+        // }
 
 
         $stmt = mysqli_prepare($connect, "SELECT user_id FROM users WHERE email = ?");
