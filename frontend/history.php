@@ -6,22 +6,17 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 
-// if ($_SERVER['HTTP_HOST' ?? ""] !== "localhost") {
-// require_once "/backend/config/config.php";
-// } else {
 require_once "../backend/config/config.php";
 
-// }
+$user_id = (int) $_SESSION["user_id"];
 
-$user_id = $_SESSION["user_id"];
+// HISTORY TABLE
 
+$sql = "SELECT history_id, pump_id, event, duration, water_used, status, created_at
+        FROM history
+        WHERE user_id = ?
+        ORDER BY created_at DESC";
 
-// HISTORY TABLE: Select logs from DB table where user_id = current logged-in user
-
-$sql = "SELECT history_id, pump_id, event, duration, water_used, status, created_at FROM history WHERE user_id = ? ORDER BY created_at DESC";
-
-
-// Prepare Statement
 $stmt = mysqli_prepare($connect, $sql);
 
 mysqli_stmt_bind_param($stmt, "i", $user_id);
@@ -31,40 +26,90 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 
-// TOTAL WATEER USAGE
-$sql_today = "SELECT COALESCE(SUM(water_used), 0) AS total_water FROM history WHERE user_id = ? AND DATE(created_at) = CURDATE()";
+// TOTAL WATER USAGE TODAY
+
+$sql_today = "SELECT COALESCE(SUM(water_used), 0) AS total_water
+              FROM history
+              WHERE user_id = ?
+              AND DATE(created_at) = CURDATE()";
 
 $stmt_dayWater = mysqli_prepare($connect, $sql_today);
+
 mysqli_stmt_bind_param($stmt_dayWater, "i", $user_id);
+
 mysqli_stmt_execute($stmt_dayWater);
 
 $result_today = mysqli_stmt_get_result($stmt_dayWater);
+
 $total_assoc_dayData = mysqli_fetch_assoc($result_today);
+
 $total_water = $total_assoc_dayData["total_water"];
 
 
-// TOTAL OPERATIONS
-$sql_opns = "SELECT COUNT(*) AS total_opns FROM history WHERE user_id = ? AND DATE(created_at) = CURDATE() AND event = 'Pump Stopped'";
+// TOTAL COMPLETED PUMP OPERATIONS TODAY
+
+$sql_opns = "SELECT COUNT(*) AS total_opns
+             FROM history
+             WHERE user_id = ?
+             AND DATE(created_at) = CURDATE()
+             AND event = 'Pump Stopped'";
 
 $stmt_opns = mysqli_prepare($connect, $sql_opns);
+
 mysqli_stmt_bind_param($stmt_opns, "i", $user_id);
+
 mysqli_stmt_execute($stmt_opns);
 
 $result_opns = mysqli_stmt_get_result($stmt_opns);
+
 $total_assoc_opns = mysqli_fetch_assoc($result_opns);
+
 $total_opns = $total_assoc_opns["total_opns"];
 
 
-// TOTAL RUNTIME
-$sql_runtime = "SELECT COALESCE(SUM(duration), 0) AS total_runtime FROM history WHERE user_id = ? AND DATE(created_at) = CURDATE()";
+// TOTAL COMPLETED RUNTIME TODAY (SECONDS)
+
+$sql_runtime = "SELECT COALESCE(SUM(duration), 0) AS total_runtime
+                FROM history
+                WHERE user_id = ?
+                AND DATE(created_at) = CURDATE()
+                AND event = 'Pump Stopped'";
 
 $stmt_runtime = mysqli_prepare($connect, $sql_runtime);
+
 mysqli_stmt_bind_param($stmt_runtime, "i", $user_id);
+
 mysqli_stmt_execute($stmt_runtime);
 
 $result_runtime = mysqli_stmt_get_result($stmt_runtime);
+
 $total_assoc_runtime = mysqli_fetch_assoc($result_runtime);
-$total_runtime = $total_assoc_runtime["total_runtime"];
+
+$total_runtime = (int) $total_assoc_runtime["total_runtime"];
+
+
+// RUNTIME FORMAT
+
+function formatRuntime($seconds)
+{
+    $seconds = max(0, (int) $seconds);
+
+    $hours = floor($seconds / 3600);
+
+    $minutes = floor(($seconds % 3600) / 60);
+
+    $remainingSeconds = $seconds % 60;
+
+    if ($hours > 0) {
+        return $hours . "h " . $minutes . "min";
+    }
+
+    if ($minutes > 0) {
+        return $minutes . "min " . $remainingSeconds . "sec";
+    }
+
+    return $remainingSeconds . "sec";
+}
 
 ?>
 
@@ -75,7 +120,7 @@ $total_runtime = $total_assoc_runtime["total_runtime"];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History | Aqua Pump</title>
-    <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="assets/aq.png">
 </head>
@@ -92,16 +137,16 @@ $total_runtime = $total_assoc_runtime["total_runtime"];
         </div>
 
         <nav class="navigation">
-            <a href="index.php" class="nav-link active">
+            <a href="index.php" class="nav-link">
                 <span>&gt;</span> Dashboard
             </a>
-            <a href="control.php" class="nav-link ">
+            <a href="control.php" class="nav-link">
                 <span>&gt;</span> Control Panel
             </a>
-            <a href="history.php" class="nav-link ">
+            <a href="history.php" class="nav-link active">
                 <span>&gt;</span> History
             </a>
-            <a href="alerts.php" class="nav-link ">
+            <a href="alerts.php" class="nav-link">
                 <span>&gt;</span> Alerts &amp; System
             </a>
         </nav>
@@ -110,7 +155,7 @@ $total_runtime = $total_assoc_runtime["total_runtime"];
             <div class="status-icon">●</div>
             <div>
                 <strong>System Status</strong>
-                <p>All systems normal</p>
+                <p>Monitoring active</p>
             </div>
         </div>
 
@@ -118,7 +163,6 @@ $total_runtime = $total_assoc_runtime["total_runtime"];
             <a href="logout.php" class="btn btn-warning">Logout</a>
         </div>
     </aside>
-
 
     <main class="main-content">
         <header class="topbar">
@@ -129,8 +173,8 @@ $total_runtime = $total_assoc_runtime["total_runtime"];
                 </div>
                 <div class="notification">🔔 <span class="notification-count">0</span></div>
                 <div class="date-time">
-                    <strong id="currentDate">14 Sep 2026</strong>
-                    <span id="currentTime">12:00 AM</span>
+                    <strong id="currentDate"><?php echo date("d/M/Y"); ?></strong>
+                    <span id="currentTime"><?php echo date("h:i A"); ?></span>
                 </div>
                 <div class="user-profile">
                     <div class="avatar">A</div>
@@ -143,11 +187,10 @@ $total_runtime = $total_assoc_runtime["total_runtime"];
             </div>
         </header>
 
-
         <section class="page-header">
             <div>
                 <h1>History</h1>
-                <p>Review recent pump operations and water usage</p>
+                <p>Review actual pump operations and water usage</p>
             </div>
         </section>
 
@@ -156,19 +199,27 @@ $total_runtime = $total_assoc_runtime["total_runtime"];
                 <div class="history-summary-item">
                     <span>Total Water Used Today</span>
                     <strong>
-                        <?php echo htmlspecialchars($total_water) . "L"; ?>
+                        <?php
+                        if ($total_water > 0) {
+                            echo htmlspecialchars($total_water) . " L";
+                        } else {
+                            echo "Not measured";
+                        }
+                        ?>
                     </strong>
                 </div>
+
                 <div class="history-summary-item">
-                    <span>Pump Operations</span>
+                    <span>Completed Operations</span>
                     <strong>
                         <?php echo htmlspecialchars($total_opns); ?>
                     </strong>
                 </div>
+
                 <div class="history-summary-item">
                     <span>Total Runtime</span>
                     <strong>
-                        <?php echo htmlspecialchars($total_runtime) . "min"; ?>
+                        <?php echo htmlspecialchars(formatRuntime($total_runtime)); ?>
                     </strong>
                 </div>
             </div>
@@ -181,25 +232,23 @@ $total_runtime = $total_assoc_runtime["total_runtime"];
                             <th>Time</th>
                             <th>Event</th>
                             <th>Pump ID</th>
-                            <!-- Willbe replaced by Pump, showing which pump performed the operation -->
                             <th>Duration</th>
                             <th>Water Used</th>
                             <th>Status</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <?php if (mysqli_num_rows($result) > 0): ?>
                             <?php while ($row = mysqli_fetch_assoc($result)): ?>
+
                                 <?php
                                 $timestamp = strtotime($row["created_at"]);
-
                                 $date = date("d M Y", $timestamp);
-
                                 $time = date("h:i A", $timestamp);
                                 ?>
 
                                 <tr>
-
                                     <td>
                                         <?php echo htmlspecialchars($date); ?>
                                     </td>
@@ -211,7 +260,9 @@ $total_runtime = $total_assoc_runtime["total_runtime"];
                                     <td class="<?php
                                     echo $row["event"] === "Pump Started"
                                         ? "event-start"
-                                        : "event-stop";
+                                        : ($row["event"] === "Pump Stopped"
+                                            ? "event-stop"
+                                            : "");
                                     ?>">
                                         <?php echo htmlspecialchars($row["event"]); ?>
                                     </td>
@@ -223,7 +274,7 @@ $total_runtime = $total_assoc_runtime["total_runtime"];
                                     <td>
                                         <?php
                                         if ($row["duration"] !== null) {
-                                            echo htmlspecialchars($row["duration"]) . "min";
+                                            echo htmlspecialchars(formatRuntime($row["duration"]));
                                         } else {
                                             echo "--";
                                         }
@@ -233,9 +284,9 @@ $total_runtime = $total_assoc_runtime["total_runtime"];
                                     <td>
                                         <?php
                                         if ($row["water_used"] !== null) {
-                                            echo htmlspecialchars($row["water_used"]) . "L";
+                                            echo htmlspecialchars($row["water_used"]) . " L";
                                         } else {
-                                            echo "--";
+                                            echo "Not measured";
                                         }
                                         ?>
                                     </td>
@@ -244,11 +295,11 @@ $total_runtime = $total_assoc_runtime["total_runtime"];
                                         <span class="badge success">
                                             <?php echo htmlspecialchars($row["status"]); ?>
                                         </span>
-
                                     </td>
-
                                 </tr>
+
                             <?php endwhile; ?>
+
                         <?php else: ?>
 
                             <tr>
@@ -256,6 +307,7 @@ $total_runtime = $total_assoc_runtime["total_runtime"];
                                     No pump history available.
                                 </td>
                             </tr>
+
                         <?php endif; ?>
                     </tbody>
                 </table>
@@ -268,3 +320,11 @@ $total_runtime = $total_assoc_runtime["total_runtime"];
 </body>
 
 </html>
+
+<?php
+mysqli_stmt_close($stmt);
+mysqli_stmt_close($stmt_dayWater);
+mysqli_stmt_close($stmt_opns);
+mysqli_stmt_close($stmt_runtime);
+mysqli_close($connect);
+?>
